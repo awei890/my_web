@@ -1,0 +1,59 @@
+{% extends '../../template/Navigator_Bar.html' %}
+
+{% block mainbody %}
+<div class="container-fluid">
+    <form class="col-xs-offset-1 col-xs-10 main" style="margin-top:20px; padding:0px;" id="search-box" method="get" action="/index">
+        <div class="col-md-11 col-xs-10" style="padding-left:0px;">
+            <input type="text" class="form-control" placeholder="查找" name="search">
+        </div>
+        <button type="submit" class="col-md-1 col-xs-2 btn btn-primary" style="">确认</button>
+    </form>
+
+    <div class="panel panel-success col-xs-offset-1 col-xs-10 main" style="margin-top:50px; padding:0px;">
+        <div class="panel-heading">检索结果</div>
+        <div class="panel-body">
+            {% for item in search_detail %}
+            <div class="media" style="margin-top:10px;">
+
+                <div class="media-left">
+                    <a href="/index/{{ item.store_number }}">
+                        <img class="media-object" src="../{{ item.image }}" alt="未找到图片">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">{{ item.name }}</h4>
+                    <p>{{ item.introduction }}</p>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+    <!--现在窗口宽度-->
+    var win = $(document).width();
+
+    if(win < 750){
+        <!--图的大小-->
+        $(".media-object").css({"width":win/6})
+
+        <!--按钮大小-->
+        $(".btn").css({"font-size":"12px","padding":"7px 0px 7px 0px"})
+
+        <!--主页面修饰-->
+        $(".main").removeClass("col-xs-offset-1")
+        $(".main").removeClass("col-xs-10")
+        $(".main").addClass("col-xs-12")
+
+    }else{
+
+        $(".media-object").css({"width":"100px"})
+    }
+
+</script>
+
+{% endblock %}

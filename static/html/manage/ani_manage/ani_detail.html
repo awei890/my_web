@@ -1,0 +1,104 @@
+{% extends '../../../template/Navigator_manage.html' %}
+
+{% block css %}
+<style>
+    .text-center{
+        "text-align:center;"
+    }
+</style>
+{% endblock %}
+
+{% block mainbody %}
+<div class="container">
+    <h1 class="center-block" style="text-align:center;">动漫详情页管理系统</h1>
+</div>
+<div class="panel panel-default container">
+    <div class="panel-body">
+        <div>
+            <a href="?add=True">
+                <button type="button" class="btn btn-info col-xs-1" id="add_info">添加信息</button>
+            </a>
+            <a href="">
+                <button type="button" class="btn btn-success col-xs-offset-10 col-xs-1" style="margin-bottom:20px;">刷新</button>
+            </a>
+        </div>
+        <table class="table table-striped" style="margin-top:20px;">
+            <thead>
+            <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">动漫名</th>
+                <th class="text-center">存储号</th>
+                <th class="text-center">语言</th>
+                <th class="text-center">图片</th>
+                <th class="text-center">连载状态</th>
+                <th class="text-center">详情页链接</th>
+                <th class="text-center">管理</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in ani_data %}
+            <tr>
+                <th scope="row" class="id text-center"></th>
+                <td class="text-center" style="">{{ item.name }}</td>
+                <td class="text-center" id="store_number">{{ item.store_number }}</td>
+                <td class="text-center">{{ item.language }}</td>
+                <td class="text-center">{{ item.image }}</td>
+                <td class="text-center">{{ item.status }}</td>
+                <td class="text-center"><a href="{{ item.ani_url }}">{{ item.ani_url }}</a></td>
+                <td class="text-center">
+                    <a href="detail?edit=true&num={{ item.store_number }}">
+                        <button type="button" class="btn btn-default edit">内容编辑</button>
+                    </a>
+                    <a href="detail/{{ item.store_number }}">
+                        <button type="button" class="btn btn-default episode">动漫源编辑</button>
+                    </a>
+                    <button type="button" class="btn btn-default delete">删除</button>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script>
+<!--这个是生成每一行的编号-->
+var i = 0
+$(".id").each(function(){
+    i = i+1
+    $(this).text(i)
+});
+</script>
+
+
+<script>
+<!--这个是删除按钮-->
+$(".delete").click(function(){
+    var tr = $(this).parent().parent();
+    var store_num = tr.find("#store_number").text();
+
+    $.ajax({
+        url:"detail",
+        type:"get",
+        data:{
+            num: store_num,
+            delete:true
+        },
+        success:function(res){
+            if(res.delete){
+                tr.remove()
+            }
+        },
+        datatype:"JSON",
+    });
+})
+</script>
+
+<script>
+    $("#ani_detail").addClass("active")
+</script>
+{% endblock %}

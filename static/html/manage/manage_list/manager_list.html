@@ -1,0 +1,86 @@
+{% extends "../../../template/Navigator_manage.html" %}
+
+{% block mainbody %}
+<div class="container">
+    <h1 class="center-block" style="text-align:center;">管理员名单</h1>
+</div>
+<div class="panel panel-default container">
+    <div class="panel-body">
+        <div>
+            <a href="?add=True">
+                <button type="button" class="btn btn-info col-xs-1">添加信息</button>
+            </a>
+            <a href="">
+                <button type="button" class="btn btn-success col-xs-offset-10 col-xs-1" style="margin-bottom:20px;">
+                    刷新
+                </button>
+            </a>
+        </div>
+        <table class="table table-striped" style="margin-top:20px;">
+            <thead>
+            <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">用户名</th>
+                <th class="text-center">密码</th>
+                <th class="text-center">编辑</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in data %}
+            <tr>
+                <th scope="row" class="id text-center"></th>
+                <td class="text-center" id="name">{{ item.name }}</td>
+                <td class="text-center">{{ item.password }}</td>
+                <td class="text-center">
+                    <a href="?edit=True&name={{ item.name }}">
+                        <button type="button" class="btn btn-default edit">编辑</button>
+                    </a>
+                    <button type="button" class="btn btn-default delete">删除</button>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block js %}
+<script>
+    $("#manager_list").addClass("active")
+    <!--这个是生成每一行的编号-->
+    var i = 0
+    $(".id").each(function(){
+        i = i+1
+        $(this).text(i)
+    });
+
+</script>
+
+<script>
+    <!--这是删除按钮-->
+    $(".delete").click(function(){
+    var tr = $(this).parent().parent();
+    var name = tr.find("#name").text();
+
+    $.ajax({
+        url:"",
+        type:"get",
+        data:{
+            name: name,
+            delete: true,
+        },
+        success:function(res){
+            if(res.delete){
+                tr.remove()
+            }
+        },
+        datatype:"JSON",
+    });
+})
+
+
+</script>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends '../../template/Navigator_Bar.html' %}
+
+{% block mainbody %}
+<h2 class="col-xs-12 col-sm-offset-1 col-sm-10 container one-line" style="padding:0px;">{{ ani_data.name }}</h2>
+<h4 class="col-xs-12 col-sm-offset-1 col-sm-10" style="padding:0px;">正在播放：第{{ now_episode.episode }}集</h4>
+<div class="col-xs-12 col-sm-offset-1 col-sm-10" style="padding:0px;">
+    <div class="embed-responsive embed-responsive-16by9">
+        <!--<video src="{{ now_episode.episode_url }}" controls="controls"></video>-->
+        <iframe src="{{ now_url }}"></iframe>
+    </div>
+</div>
+
+<div class="panel panel-default col-xs-12 col-sm-offset-1 col-sm-10" style="padding:0px; margin-top:50px;">
+    <div class="panel-heading" >
+        <h3 class="panel-title">在线观看</h3>
+    </div>
+
+    <div class="panel-body">
+        <ul class="nav nav-tabs" style="margin-bottom:10px; padding-left:10px; padding-right:10px;">
+            {% for item in source %}
+            <li role="presentation" class="active"><a href="#">源{{ item.source_num }}</a></li>
+            {% endfor %}
+        </ul>
+        <div>
+            <div class="btn-toolbar container row" role="toolbar" aria-label="...">
+                {% for item in episodes %}
+                <a href="video?episode={{ item.episode }}">
+                    <button type="button" class="btn btn-default col-xs-3 col-sm-1">第{{ item.episode }}集
+                    </button>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script>
+    <!--现在窗口宽度-->
+    var win = $(document).width();
+
+    <!--当窗口宽度小于750px时，去除外边距(即:col-xs)-->
+    if(win < 750){
+        <!--整体内容间距调整-->
+        $(".col-xs-12").css({"padding":""})
+        $(".panel").css({"padding":"0px"})
+    }
+
+</script>
+{% endblock %}
+

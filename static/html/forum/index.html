@@ -1,0 +1,76 @@
+{% extends '../../template/Navigator_Bar.html'%}
+
+{% block mainbody %}
+<div>
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                频道区
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-4 col-sm-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">频道分类</h3>
+            </div>
+            <div class="panel-body">
+                <p>分类1</p>
+                <p>分类2</p>
+                <p>分类3</p>
+                <p>分类4</p>
+                <p>分类5</p>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">应该是广告</h3>
+            </div>
+            <div class="panel-body">
+                <p>分类1</p>
+                <p>分类2</p>
+                <p>分类3</p>
+                <p>分类4</p>
+                <p>分类5</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-8 col-sm-10">
+        <div class="panel panel-default">
+
+            <div class="panel-body">
+                <h1>频道列表</h1>
+                <hr>
+                {% for item in form %}
+                <div class="media">
+                    <div class="media-left media-middle">
+                        <a href="#">
+                            <img class="media-object"
+                                 src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xOGExNjQxMTVmYyB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE4YTE2NDExNWZjIj48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxMy4xNzMwMDQxNTAzOTA2MjUiIHk9IjM2LjUiPjY0eDY0PC90ZXh0PjwvZz48L2c+PC9zdmc+"
+                                 alt="频道图片">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">标题</h4>
+                        简介
+                    </div>
+                    <div class="media-right">
+                        <button type="button" class="btn btn-primary">进入</button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+    <!--导航栏聚焦-->
+    $("#channel").addClass("active")
+</script>
+{% endblock %}

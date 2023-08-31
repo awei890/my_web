@@ -1,0 +1,75 @@
+{% extends '../../template/Navigator_Bar.html'%}
+
+
+{% block mainbody %}
+<div class="container">
+    <div class="panel panel-default" style="">
+        <div class="panel-heading">欢迎您</div>
+        <div class="panel-body">
+
+            <div class="col-xs-12 col-sm-6" style="border-right: 1px solid rgb(146, 146, 146);">
+                <div class="jumbotron">
+                    <h1>你好!</h1>
+                    <p>这里是一张图片</p>
+                    <p><a class="btn btn-primary" href="#" role="button">Do you want to learn more?</a></p>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <h2 style="text-align: center;padding-bottom: 20px;">登录页面</h2>
+
+                <form class="form-horizontal" method="post" action="">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">用户名</label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control" placeholder="用户名" name="username">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">密码</label>
+                        <div class="col-xs-10">
+                            <input type="password" class="form-control" placeholder="密码" name="password">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-offset-2 col-xs-10">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"> 记住账号
+                                </label>
+
+                                <a href="#" class="col-sm-offset-7">忘记密码？</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-offset-2 col-xs-10">
+                            <button type="submit" class="btn btn-default col-xs-4 col-sm-5">登录</button>
+                            <a href="/index/register/">
+                                <button type="button"
+                                        class="btn btn-info col-xs-offset-4 col-xs-4 col-sm-5 col-sm-offset-2">注册
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block js %}
+<script>
+    $("#login").removeClass("hide");
+    $("#register").removeClass("hide");
+    $("#user").parent().remove();
+
+</script>
+{% endblock %}
+

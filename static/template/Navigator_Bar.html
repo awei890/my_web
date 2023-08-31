@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static '\plugins\bootstrap-3.4.1\css\bootstrap.css' %}">
+
+
+    <style>
+        .hide{
+            display: None;
+        }
+
+        .one-line{
+            text-overflow:ellipsis;
+            white-space:nowrap;
+            overflow:hidden;
+        }
+
+    </style>
+    {% block css %}
+    {% endblock %}
+</head>
+
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <!--loge图-->
+            <a class="navbar-brand" href="/index">
+                <img alt="Loge" src="...">
+            </a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="">主页</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li id="ani"><a href="/index"> 动漫首页 <span class="sr-only">(current)</span></a></li>
+                <li id="channel" ><a href="/forum/channel">频道首页</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li id="login"><a href="/index/login/">登录</a></li>
+                <li id="register"><a href="/index/register/">注册</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-haspopup="true"
+                       aria-expanded="false">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"
+                              style="margin-right:4px;"></span>
+                        <span id="user">下拉框</span>
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">动作1</a></li>
+                        <li><a href="#">动作2</a></li>
+                        <li><a href="#">动作3</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/index/clear">退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+{% block mainbody %}
+{% endblock %}
+
+<script src="{% static '/plugins/jquery/jquery-3.7.0.js' %}"></script>
+<script src="{% static '/plugins/bootstrap-3.4.1/js/bootstrap.js' %}"></script>
+
+
+<script>
+if( Boolean( "{{ request.session.user_info.username }}" ) ){
+    $("#login").remove();
+    $("#register").remove();
+    $("#user").text("{{ request.session.user_info.username }}");
+}else{
+    $("#user").parent().remove();
+}
+
+</script>
+
+{% block js %}
+{% endblock %}
+</body>
+
+</html>

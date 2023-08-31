@@ -1,0 +1,70 @@
+{% extends '../../../template/Navigator_manage.html' %}
+
+{% block mainbody %}
+<div class="container">
+    <h1 class="center-block" style="text-align:center;">动漫源系统</h1>
+</div>
+<div class="panel panel-default container">
+    <div class="panel-body">
+        <div>
+            <a href="?add=true">
+                <button type="button" class="btn btn-info">添加源</button>
+            </a>
+        </div>
+        <table class="table table-striped" style="margin-top:20px;">
+            <thead>
+            <tr>
+                <th class="text-center">源号码</th>
+                <th class="text-center">来源</th>
+                <th class="text-center">管理</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for item in source_list %}
+            <tr>
+                <th scope="row" class="text-center">{{ item.source_num }}</th>
+                <td class="text-center name">{{ item.name }}</td>
+                <td class="text-center">
+                    <a href="?edit=true&source_num={{ item.source_num }}">
+                        <button type="button" class="btn btn-default">编辑</button>
+                    </a>
+                    <a href="./{{ num }}/{{ item.source_num }}">
+                        <button type="button" class="btn btn-default episode">集数编辑</button>
+                    </a>
+                    <button type="button" class="btn btn-default delete">删除</button>
+                </td>
+                <td class="hide mysql_id">{{ item.id }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block js %}
+<script>
+    $(".delete").click(function(){
+        var tr = $(this).parent().parent();
+        var name = tr.find(".name").text();
+
+        $.ajax({
+            url:"",
+            type:"get",
+            data:{
+                "delete":true,
+                "name":name,
+            },
+            datatype:"JSON",
+            success(res){
+                if(res.delete){
+                    tr.remove()
+                }
+            },
+        })
+    })
+</script>
+{% endblock %}

@@ -1,3 +1,5 @@
+import random
+
 from basic_func import models as m1
 from django.forms import ModelForm
 from django.http import JsonResponse
@@ -95,7 +97,12 @@ def index(request):
         data = m2.Anime_detail.objects.filter(name__iregex=r".*?{}.*?".format(name))
         return render(request, "html/index/search.html", {"search_detail": data})
 
-    data = m2.Anime_detail.objects.all()[0:10]
+    data = m2.Anime_detail.objects.all()
+    i = random.randint(0, data.count() - 10)
+    # 随机在范围内抽取一个数
+    data = data[i: i + 10]
+    # 从这个数开始取十个数
+
     return render(request, 'html/index/index.html', {"ani_detail": data})
 
 

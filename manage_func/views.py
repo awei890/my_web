@@ -115,7 +115,7 @@ def detail(request):
             detail_form = Detail_form()
             return render(request, 'html/manage/ani_manage/ani_add.html', {"form": detail_form})
 
-        if request.GET.get("edit") and request.GET.get("num"):
+        if request.GET.get("edit"):
             # 编辑详情页数据
             num = request.GET.get("num")
             o = models.Anime_detail.objects.get(store_number=num)
@@ -236,6 +236,7 @@ def source(request, num):
             return render(request, 'html/manage/source_manage/source_edit.html', {"form": data})
 
         if request.POST.get("re_edit"):
+            # 重新编辑表单
             name = request.POST.get("name")
             # 这个是重新编写详情
             o = now_ani.Anime_source.all().filter(name=name).first()

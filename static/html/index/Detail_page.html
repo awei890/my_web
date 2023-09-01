@@ -6,8 +6,8 @@
 </h1>
 <div class="container" style="margin-top:10px;">
 
-    <div class="col-sm-4 col-xs-6"  style="padding:0px;">
-        <img src="{{ ani_data.image }}" alt="..." class="img-thumbnail">
+    <div class="col-sm-4 col-xs-6 image"  style="padding:0px;">
+        <img src="{{ ani_data.image }}" alt="..." class="img-responsive center-block">
     </div>
 
     <div class="col-sm-8 col-xs-6">
@@ -41,7 +41,7 @@
                 <!--源如果激活，则显示-->
                 {% for item in episodes %}
                 <a href="{{ now_source }}/video?episode={{ item.episode }}">
-                    <button type="button" class="btn btn-default" style="margin:5px;">第{{ item.episode }}集</button>
+                    <button type="button" class="btn btn-default col-sm-1 col-xs-3" style="margin:5px;">第{{ item.episode }}集</button>
                 </a>
                 {% endfor %}
             </div>
@@ -60,9 +60,12 @@ if( "{{ ani_data.status }}" == "True" ){
 }else{
     $("#serialize").text("连载：已完结")
 }
-</script>
 
-<script>
-    $("#{{ now_source }}").addClass("active")
+<!--为当前下面的源添加active-->
+$("#{{ now_source }}").addClass("active")
+
+<!--图片大小变化-->
+var img_height = $(".image").width() / 3 * 4
+$(".img-responsive").css({"height":img_height})
 </script>
 {% endblock %}

@@ -25,7 +25,7 @@
             <div class="btn-toolbar container row" role="toolbar" aria-label="...">
                 {% for item in episodes %}
                 <a href="video?episode={{ item.episode }}">
-                    <button type="button" class="btn btn-default col-xs-3 col-sm-1">第{{ item.episode }}集
+                    <button type="button" class="btn btn-default col-xs-3 col-sm-1" style="margin:5px;">第{{ item.episode }}集
                     </button>
                 </a>
                 {% endfor %}

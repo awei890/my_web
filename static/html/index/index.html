@@ -110,7 +110,7 @@
                     {% for item in ani_detail %}
                     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4 list">
                         <div class="thumbnail">
-                            <img src="{{ item.image }}" alt="未找到图片">
+                            <img class="img-responsive center-block" src="{{ item.image }}" alt="未找到图片">
                             <div class="caption" style="padding:2px;">
                                 <p class="name one-line">
                                     {{ item.name }}</p>
@@ -154,6 +154,10 @@
         <!--动漫展示表改变-->
         $(".list").css({"padding":"0px 4px"})
 
+        <!--调整图片比为9/16-->
+        var img_height = $(".caption").width() / 9 * 14
+        $(".img-responsive").css({"height":img_height})
+
         <!--按钮栏<p>调整-->
         $(".btn-div").css({"padding-right":"0px","padding-left":"0px"})
 
@@ -163,12 +167,12 @@
 
         <!--动漫名称大小调整-->
         $(".name").css({"font-size":"12px"})
-    }
+    }else{
+        <!--设置默认图片大小比为3/4-->
+        var img_height = $(".caption").width() / 3 * 4
+        $(".img-responsive").css({"height":img_height})
+    };
 
-
-</script>
-
-<script>
     <!--这个是星期的js-->
     $(".week").click(function(){
         $(".week").each(function(){
@@ -178,11 +182,9 @@
 
         $(this).removeAttr("style")
         $(this).addClass("now")
-    })
-</script>
+    });
 
-<script>
     <!--导航栏聚焦-->
-    $("#ani").addClass("active")
+    $("#ani").addClass("active");
 </script>
 {% endblock %}

@@ -45,6 +45,7 @@ class Anime_episode(models.Model):
 class Channel(models.Model):
     '''频道表'''
     name = models.CharField(verbose_name='频道名称', max_length=16)
+    sign = models.CharField(verbose_name="简述", max_length=64)
     auther = models.CharField(verbose_name='作者', max_length=16)
     subscribe = models.BigIntegerField(verbose_name='订阅')
     image = models.ImageField(verbose_name='频道图片')

@@ -31,7 +31,8 @@
     </div>
     <div class="panel-body">
         <ul class="nav nav-tabs" style="margin-bottom:10px; padding-left:10px; padding-right:10px;">
-            <li role="presentation" class="active" id="1"><a href="./">源1</a></li>
+            <li role="presentation" id="1"><a href="./1">源1</a></li>
+            <li role="presentation" id="2"><a href="./2">源2</a></li>
         </ul>
         <div>
             <div class="btn-toolbar container row" role="toolbar" aria-label="...">
@@ -59,7 +60,7 @@ if( "{{ ani_data.status }}" == "True" ){
 }
 
 <!--为当前下面的源添加active-->
-$("#1").addClass("active")
+$("#{{ now_source }}").addClass("active")
 
 <!--图片大小变化-->
 var img_height = $(".image").width() / 3 * 4

@@ -23,6 +23,8 @@
             <thead>
             <tr>
                 <th class="text-center">#</th>
+                <th class="text-center">id</th>
+                <th class="text-center">源的号</th>
                 <th class="text-center">集数</th>
                 <th class="text-center">视频url</th>
                 <th class="text-center">管理</th>
@@ -33,15 +35,16 @@
             {% for item in epi_list %}
             <tr>
                 <th scope="row" class="id text-center"></th>
-                <td class="text-center" id="episode">第{{ item.episode }}集</td>
+                <td class="text-center mysql_id">{{ item.id }}</td>
+                <td class="text-center">{{ item.source_num }}</td>
+                <td class="text-center">第{{ item.episode }}集</td>
                 <td class="text-center">{{ item.episode_url }}</td>
                 <td class="text-center">
-                    <a href="?edit=true&mysql_id={{ item.id }}">
+                    <a href="?edit=true&id={{ item.id }}">
                         <button type="button" class="btn btn-default episode">编辑</button>
                     </a>
                     <button type="button" class="btn btn-default delete">删除</button>
                 </td>
-                <td class="hide mysql_id">{{ item.id }}</td>
             </tr>
             {% endfor %}
             </tbody>
@@ -74,7 +77,7 @@ $(".delete").click(function(){
         url:"",
         type:"get",
         data:{
-            mysql_id:mysql_id,
+            id:mysql_id,
             delete:true
         },
         success:function(res){

@@ -31,21 +31,6 @@ class Detail_form(ModelForm):
                 field.widget.attrs = {"class": "form-control"}
 
 
-class Source_form(ModelForm):
-    '''modelform插件，用于episode_edit'''
-
-    class Meta:
-        # 表是Anime_source
-        model = models.Anime_source
-        fields = "__all__"
-        exclude = ["link"]
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for name, field in self.fields.items():
-            field.widget.attrs = {"class": "form-control"}
-
-
 class Episode_form(ModelForm):
     '''modelform插件，用于episode_edit'''
 
@@ -154,19 +139,21 @@ def detail(request):
             # 拿到对象
             o = models.Anime_detail.objects.get(store_number=num)
             # 拿到源文件图片路径（用于后面删除）
-            image_path = o.image
+            # image_path = o.image
             # 拿到数据重新覆盖对象
             data = Detail_form(request.POST, request.FILES, instance=o)
 
             if data.is_valid():
                 # 如果正确则保存
                 data.save()
+                '''
                 # 如果源路径存在图片  and  后来的路径与源路径不同
                 if o.image != "{}".format(image_path) and os.path.exists("{}".format(image_path)):
                     # 删除原图片
                     os.remove("{}".format(image_path))
                 # 图片处理(图片原路径覆盖)
                 pillow_process.Image_process("{}".format(o.image), width=240)
+                '''
                 # 返回detail页面
                 return redirect("./detail")
 
@@ -175,90 +162,11 @@ def detail(request):
 
 
 # —————————————————————————————————————————————————————分割符————————————————————————————————————————————————————————————
-
-def source(request, num):
-    '''
-    动漫源管理
-    req:
-        ip/manage/detail/<int:num>
-    res:
-        get -> source_detail.html         参数：{"source_list": data}
-        get(add)  ->  source_add.html     参数：{"form": form}
-        get(edit) ->  source_edit.html    参数：{"form": instance}
-        get(delete)  ->  返回参数               {"form": instance}
-
-         post(由source_add.html提交表单而来)(save)        ->      ip/manage/detail/(num视频储藏号)(重定向)
-        post(由source_edit.html提交表单而来)(re_edit)  ->      ip/manage/detail/(num视频储藏号)(重定向)
-    '''
-
-    # 详情页
-    now_ani = models.Anime_detail.objects.filter(store_number=num).first()
-
-    if request.method == "GET":
-        if request.GET.get("add"):
-            # 进入添加页面
-            form = Source_form()
-            return render(request, 'html/manage/source_manage/source_add.html', {"form": form})
-
-        if request.GET.get("edit"):
-            # 进入编辑页面
-            source_num = request.GET.get("source_num")
-            o = now_ani.Anime_source.all().filter(source_num=source_num).first()
-            instance = Source_form(instance=o)
-            return render(request, "html/manage/source_manage/source_edit.html", {"form": instance})
-
-        if request.GET.get("delete"):
-            # 删除
-            name = request.GET.get("name")
-            now_ani.Anime_source.all().filter(name=name).first().delete()
-            # 返回一个json文件表示删除完成
-            return JsonResponse({"delete": True})
-
-        # 整体展示页面
-        data = now_ani.Anime_source.all()
-        return render(request, 'html/manage/source_manage/source_detail.html', {"source_list": data, "num": num})
-
-    else:
-        # 添加的表单
-        if request.POST.get("save"):
-            # 这个是提交表单
-            data = Source_form(request.POST, request.FILES)
-            # 设置默认外键链接(instance表示现在)
-            data.instance.link = now_ani
-
-            if data.is_valid():
-                # 如果正确则保存
-                data.save()
-                # 返回集数展示页面
-                return redirect("./{}".format(num))
-
-            # 否则返回错误信息
-            return render(request, 'html/manage/source_manage/source_edit.html', {"form": data})
-
-        if request.POST.get("re_edit"):
-            # 重新编辑表单
-            name = request.POST.get("name")
-            # 这个是重新编写详情
-            o = now_ani.Anime_source.all().filter(name=name).first()
-            # 拿到数据重新覆盖对象
-            data = Source_form(request.POST, request.FILES, instance=o)
-            if data.is_valid():
-                # 如果正确则保存
-                data.save()
-                # 返回detail页面
-                return redirect("./{}".format(num))
-
-            # 否则返回错误信息
-            return render(request, 'html/manage/source_manage/source_edit.html',
-                          {"form": data})
-
-
-# —————————————————————————————————————————————————————分割符————————————————————————————————————————————————————————————
-def episode(request, num, source):
+def episode(request, num):
     '''
     动漫集数管理
     req:
-        ip/manage/detail/<int:num>/<int:source>
+        ip/manage/detail/<int:num>/episodes
     res:
         get                 -> episode_detail.html              参数：{"epi_list": episode_list, "num": num}
         get(add)            -> episode_edit.html                参数：{"form": episode_form, "num": num}
@@ -268,8 +176,6 @@ def episode(request, num, source):
         post(由episode_edit.html提交表单而来)(save)        ->      ip/manage/detail/(num视频储藏号)(重定向)
         post(由episode_re_edit.html提交表单而来)(re_edit)  ->      ip/manage/detail/(num视频储藏号)(重定向)
     '''
-    # 先找到详情页，再通过外键找到他的当前源对象
-    now_source = models.Anime_detail.objects.get(store_number=num).Anime_source.get(source_num=source)
 
     if request.method == 'GET':
         if request.GET.get("add"):
@@ -278,25 +184,23 @@ def episode(request, num, source):
             return render(request, 'html/manage/episode_manage/episode_edit.html', {"form": episode_form, "num": num})
 
         if request.GET.get("edit"):
-            mysql_id = request.GET.get("mysql_id")
+            mysql_id = request.GET.get("id")
             # 编辑视频集数数据
-            o = now_source.episode_detail.all().get(id=mysql_id)
+            o = models.Anime_episode.objects.get(id=mysql_id)
             ani_data = Episode_form(instance=o)
             return render(request, 'html/manage/episode_manage/episode_re_edit.html',
-                          {"form": ani_data, "mysql_id": mysql_id, "num": num})
+                          {"form": ani_data, "mysql_id":mysql_id})
 
         if request.GET.get("delete"):
-            mysql_id = request.GET.get("mysql_id")
+            # 拿到id
+            mysql_id = request.GET.get("id")
             # 删除操作
-            # 这里由动漫主页面通过外键拿到所有集数对象
-            epi_list = now_source.episode_detail.all()
-            # 集数删除
-            epi_list.get(id=mysql_id).delete()
+            models.Anime_episode.objects.filter(id=mysql_id).first().delete()
             # 返回一个json文件表示删除完成
             return JsonResponse({"delete": True})
 
-        # 先找到详情页，再通过外键找到他的所有源，再找他所有的集数
-        episode_list = now_source.episode_detail.all()
+        # 先找到详情页，再通过外键找他所有的集数
+        episode_list = models.Anime_detail.objects.filter(store_number=num).first().episode_detail.all()
         return render(request, 'html/manage/episode_manage/episode_detail.html', {"epi_list": episode_list, "num": num})
 
     # +++-----------------------------------上面为get请求，下面为post请求------------------------------------------------+++
@@ -306,13 +210,13 @@ def episode(request, num, source):
             # 这个是提交表单
             data = Episode_form(request.POST, request.FILES)
             # 设置默认外键链接(instance表示现在)
-            data.instance.link = now_source
+            data.instance.link = models.Anime_detail.objects.filter(store_number=num).first()
 
             if data.is_valid():
                 # 如果正确则保存
                 data.save()
                 # 返回集数展示页面
-                return redirect("./{}".format(source))
+                return redirect("./episodes")
 
             # 否则返回错误信息
             return render(request, 'html/manage/episode_manage/episode_edit.html',
@@ -322,14 +226,14 @@ def episode(request, num, source):
             # 这个是重新编写详情
             mysql_id = request.POST.get("mysql_id")
             # 拿到对象
-            o = now_source.episode_detail.all().get(id=mysql_id)
+            o = models.Anime_episode.objects.get(id=mysql_id)
             # 拿到数据重新覆盖对象
             data = Episode_form(request.POST, request.FILES, instance=o)
             if data.is_valid():
                 # 如果正确则保存
                 data.save()
                 # 返回detail页面
-                return redirect("./{}".format(source))
+                return redirect("./episodes")
 
             # 否则返回错误信息
             return render(request, 'html/manage/episode_manage/episode_re_edit.html',
@@ -477,8 +381,7 @@ def manager_list(request):
         if request.GET.get("delete"):
             # 这是删除
             name = request.GET.get("name")
-            manager = models.Manager.objects.filter(name=name).first()
-            manager.delete()
+            models.Manager.objects.filter(name=name).first().delete()
             return JsonResponse({"delete": True})
 
         if request.GET.get('add'):

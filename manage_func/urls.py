@@ -5,8 +5,7 @@ from manage_func import views
 urlpatterns = [
     # 动漫管理
     path('detail', views.detail),
-    path('detail/<int:num>', views.source),
-    path('detail/<int:num>/<int:source>', views.episode),
+    path('detail/<int:num>/episodes', views.episode),
     # 主页面
     path("", views.manage),
     path("login", views.login),

@@ -22,18 +22,11 @@ class Anime_detail(models.Model):
     introduction = models.TextField(verbose_name="简介", max_length=256)
 
 
-class Anime_source(models.Model):
-    """动漫来源表"""
-    name = models.CharField(verbose_name="资源来源", max_length=64)
-    source_num = models.IntegerField(verbose_name="源的号")
-    link = models.ForeignKey(verbose_name="外键链接", to='Anime_detail', on_delete=models.CASCADE,
-                             related_name="Anime_source")
-
-
 class Anime_episode(models.Model):
     '''动漫集数表'''
-    link = models.ForeignKey(verbose_name="外键链接", to='Anime_source', on_delete=models.CASCADE,
+    link = models.ForeignKey(verbose_name="外键链接", to='Anime_detail', on_delete=models.CASCADE,
                              related_name="episode_detail")
+    source_num = models.IntegerField(verbose_name="来源的储存号")
     episode = models.CharField(verbose_name="集数", max_length=16)
     episode_url = models.CharField(verbose_name="视频地址", max_length=516)
 

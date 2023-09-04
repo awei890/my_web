@@ -95,20 +95,25 @@ def index(request):
     if request.GET.get("search"):
         name = request.GET.get("search")
         data = m2.Anime_detail.objects.filter(name__iregex=r".*?{}.*?".format(name))
-        return render(request, "html/index/search.html", {"search_detail": data})
+        if not data:
+            nothing = "未找到相关结果，请重新提交"
+        else:
+            nothing = ''
+
+        return render(request, "html/index/search.html", {"search_detail": data,"search_name": name, "nothing": nothing})
 
     data = m2.Anime_detail.objects.all()
-    i = random.randint(0, data.count() - 10)
-    # 随机在范围内抽取一个数
-    data = data[i: i + 10]
-    # 从这个数开始取十个数
-
     return render(request, 'html/index/index.html', {"ani_detail": data})
 
 
 def detail_page_default(request, num):
-    source = m2.Anime_detail.objects.get(store_number=num).Anime_source.all().first().source_num
-    return redirect("./{}".format(source))
+    '''
+    当从首页跳转不带源编号时，默认跳转源1
+    req:
+        ip/index/(动漫编号[限制数字int])
+            num -> 项目编号
+    '''
+    return redirect("./{}".format(1))
 
 
 def detail_page(request, num, source):
@@ -123,10 +128,9 @@ def detail_page(request, num, source):
     '''
 
     data = m2.Anime_detail.objects.get(store_number=num)
-    source_data = data.Anime_source.all()
-    episodes = source_data.filter(source_num=source).first().episode_detail.all()
+    episodes = data.episode_detail.all().filter(source_num=source)
     return render(request, 'html/index/Detail_page.html',
-                  {"ani_data": data, "source": source_data, "now_source": source, "episodes": episodes})
+                  {"ani_data": data, "now_source": source, "episodes": episodes})
 
 
 def video_page(request, num, source):
@@ -145,18 +149,18 @@ def video_page(request, num, source):
 
     # 拿到此视频的视频详情页的表
     data = m2.Anime_detail.objects.get(store_number=num)
-    # 拿到此视频具体源
-    source_data = data.Anime_source.all()
+    # 拿到集数的表
+    eps_data = data.episode_detail.all()
 
     if source == 1:
         '''源1的解析'''
         # 拿到此视频具体集数表
-        episodes = source_data.filter(source_num=source).first().episode_detail.all()
+        episodes = eps_data.filter(source_num=1)
         # 拿到现在的集数的url
         now_episode = episodes.get(episode=episode)
         now_episode_url = yinghua.get_url(url=now_episode.episode_url)
     return render(request, 'html/index/video_page.html',
-                  {"ani_data": data, "source": source_data, "episodes": episodes, "now_episode": now_episode,
+                  {"ani_data": data, "episodes": episodes, "now_episode": now_episode,
                    "now_url": now_episode_url})
 
 

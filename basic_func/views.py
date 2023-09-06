@@ -1,5 +1,3 @@
-import random
-
 from basic_func import models as m1
 from django.forms import ModelForm
 from django.http import JsonResponse
@@ -49,11 +47,11 @@ def login(request):
         user = m1.Users.objects.filter(name=username).first()
         if not user:
             # 匹配失败
-            return JsonResponse({'username': False})
+            return render(request, 'html/index/login.html', {'username_error': "未找到用用户名"})
 
         if password != user.password:
             # 密码匹配失败
-            return JsonResponse({'password': False})
+            return render(request, 'html/index/login.html', {'password_error': "密码匹配失败"})
 
         # 都成功的话就设定一个cookie
         request.session["user_info"] = {"username": username, "password": password}
@@ -100,7 +98,8 @@ def index(request):
         else:
             nothing = ''
 
-        return render(request, "html/index/search.html", {"search_detail": data,"search_name": name, "nothing": nothing})
+        return render(request, "html/index/search.html",
+                      {"search_detail": data, "search_name": name, "nothing": nothing})
 
     data = m2.Anime_detail.objects.all()
     return render(request, 'html/index/index.html', {"ani_detail": data})

@@ -31,14 +31,13 @@
                 <td class="text-center">{{ item.name }}</td>
                 <td class="text-center">{{ item.auther }}</td>
                 <td class="text-center">{{ item.image }}</td>
-                <td class="text-center">{{ item.seq_num }}</td>
+                <td class="text-center" id="seq_num">{{ item.seq_num }}</td>
                 <td class="text-center">
-                    <a href="?edit=true">
+                    <a href="?edit=true&seq_num={{ item.seq_num }}">
                         <button type="button" class="btn btn-default episode">编辑</button>
                     </a>
                     <button type="button" class="btn btn-default delete">删除</button>
                 </td>
-                <td class="hide">{{ item.id }}</td>
             </tr>
             {% endfor %}
             </tbody>
@@ -51,5 +50,27 @@
 {% block js %}
 <script>
     $("#channel_list").addClass("active")
+
+
+    <!--这个是删除按钮-->
+    $(".delete").click(function(){
+        var tr = $(this).parent().parent();
+        var seq_num = tr.find("#seq_num").text();
+
+        $.ajax({
+            url:"",
+            type:"get",
+            data:{
+                seq_num: seq_num,
+                delete:true
+            },
+            success:function(res){
+                if(res.delete){
+                    tr.remove()
+                }
+            },
+            datatype:"JSON",
+        });
+    })
 </script>
 {% endblock %}

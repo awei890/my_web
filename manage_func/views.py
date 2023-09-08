@@ -5,7 +5,6 @@ from django.forms import ModelForm
 from django.http import JsonResponse
 from django.shortcuts import render, HttpResponse, redirect
 from manage_func import models
-from static.plugins.image_processing import pillow_process
 
 
 # Create your views here.
@@ -86,11 +85,11 @@ def detail(request):
     res:
         get                                         -> ani_detail.html            参数：{'ani_data': ani_data}
         get(add)                                    -> ani_add.html               参数：{"form": detail_form}
-        get(edit and num[视频编号])                   -> ani_edit.html             参数：{"form": ani_data})
+        get(edit and num[视频编号])                   -> ani_edit.html             参数：{"form": ani_data}
         get(delete and num[视频编号])                 -> 删除数据，返回                    {"delete": True}
 
-        post(由ani_add.html提交表单而来)(save)         ->   ip/manage/detail(重定向)
-        post(由ani_re_edit.html提交表单而来)(re_edit)  ->   ip/manage/detail(重定向)
+        post(由ani_add.html提交表单而来)(save)         ->   ani_add.html           参数：{"form": data}
+        post(由ani_re_edit.html提交表单而来)(re_edit)  ->   ani_re_edit.html       参数：{"form": data}
 
     '''
 
@@ -107,7 +106,7 @@ def detail(request):
             ani_data = Detail_form(instance=o)
             return render(request, 'html/manage/ani_manage/ani_re_edit.html', {"form": ani_data})
 
-        if request.GET.get("delete") and request.GET.get("num"):
+        if request.GET.get("delete"):
             # 删除操作
             num = request.GET.get("num")
             models.Anime_detail.objects.filter(store_number=num).first().delete()
@@ -161,7 +160,7 @@ def detail(request):
             return render(request, 'html/manage/ani_manage/ani_re_edit.html', {"form": data})
 
 
-# —————————————————————————————————————————————————————分割符————————————————————————————————————————————————————————————
+# —————————————————————————————————————————————————————
 def episode(request, num):
     '''
     动漫集数管理
@@ -170,11 +169,11 @@ def episode(request, num):
     res:
         get                 -> episode_detail.html              参数：{"epi_list": episode_list, "num": num}
         get(add)            -> episode_edit.html                参数：{"form": episode_form, "num": num}
-        get(edit)           -> episode_re_edit.html             参数：{"form": ani_data, "mysql_id": mysql_id, "num": num}
+        get(edit)           -> episode_re_edit.html             参数：{"form": ani_data, "mysql_id": mysql_id}
         get(delete)         -> 返回参数                          参数：{"delete": True}
 
-        post(由episode_edit.html提交表单而来)(save)        ->      ip/manage/detail/(num视频储藏号)(重定向)
-        post(由episode_re_edit.html提交表单而来)(re_edit)  ->      ip/manage/detail/(num视频储藏号)(重定向)
+        post(由episode_edit.html提交表单而来)(save)        ->      episode_edit.html       参数：{"form": episode_form, "num": num}
+        post(由episode_re_edit.html提交表单而来)(re_edit)  ->      episode_re_edit.html    参数：{"form": data, "mysql_id": mysql_id, "num": num}
     '''
 
     if request.method == 'GET':
@@ -189,7 +188,7 @@ def episode(request, num):
             o = models.Anime_episode.objects.get(id=mysql_id)
             ani_data = Episode_form(instance=o)
             return render(request, 'html/manage/episode_manage/episode_re_edit.html',
-                          {"form": ani_data, "mysql_id":mysql_id})
+                          {"form": ani_data, "mysql_id": mysql_id})
 
         if request.GET.get("delete"):
             # 拿到id
@@ -254,19 +253,20 @@ def manage(request):
     return render(request, "html/manage/manage_index.html")
 
 
-# —————————————————————————————————————————————————————分割符————————————————————————————————————————————————————————————
+# —————————————————————————————————————————————————————
 def users(request):
     '''
     用户管理详情页
     req:
         ip/manage/user
     res:
-        get                 -> user_detail.html
+        get                 -> user_detail.html                 参数：{"form": o}
         get(delete)         -> 返回参数                          参数：{"delete": True}
         get(edit)           -> 返回参数                          参数：{"form": form}
         get(add)            -> user_add.html                    参数：{"form": form}
 
-        post(由user_re_edit.html提交表单而来)(re_edit)   ->      ip/manage/users(重定向)
+        post(由user_re_edit.html提交表单而来)(save)        ->      user_add.html       参数：{"form": data}
+        post(由user_re_edit.html提交表单而来)(re_edit)     ->      user_re_edit.html   参数：{"form": data}
     '''
     if request.method == "GET":
         if request.GET.get("add"):
@@ -329,7 +329,7 @@ def users(request):
             return render(request, "html/manage/users_manage/user_re_edit.html", {"form": data})
 
 
-# —————————————————————————————————————————————————————分割符————————————————————————————————————————————————————————————
+# —————————————————————————————————————————————————————
 def login(request):
     '''
     管理员用户登录
@@ -338,7 +338,7 @@ def login(request):
     req:
         get ->  manage_login.html
 
-        post ->
+        post -> 设置cookie,重定向到  ip/manage
     '''
     if request.method == "GET":
         return render(request, "html/manage/manage_login.html")
@@ -361,20 +361,20 @@ def login(request):
         return redirect("/manage")
 
 
-# —————————————————————————————————————————————————————分割符————————————————————————————————————————————————————————————
+# —————————————————————————————————————————————————————
 def manager_list(request):
     '''
     管理员列表
     req
         ip/manage/administrators
     res
-        get         ->      manager_list.html
+        get         ->      manager_list.html           {"data": data}
         get(delete) ->                                  {"delete": True}
         get(add)    ->      manager_add.html            {"form": form}
         get(edit)   ->      manager_re_edit.html        {"data": data}
 
-        post(由manager_add.html提交表单而来)(save)         ->    重定向  ip/manage/administrators
-        post(由manager_re_edit.html提交表单而来)(re_edit)  ->    重定向  同上
+        post(由manager_add.html提交表单而来)(save)         ->    manager_add.html          {"form": data}
+        post(由manager_re_edit.html提交表单而来)(re_edit)  ->    manager_re_edit.html      {"data": data}
     '''
     if request.method == "GET":
 
@@ -429,7 +429,7 @@ def manager_list(request):
             return render(request, "html/manage/manage_list/manager_re_edit.html", {"data": data})
 
 
-# —————————————————————————————————————————————————————分割符————————————————————————————————————————————————————————————
+# —————————————————————————————————————————————————————
 def clear(request):
     '''清除专用'''
     request.session.clear()
@@ -462,8 +462,10 @@ def Channel_manage(request):
     req:
         ip/manage/channel
     res:
-        get  ->  channel_detail.html
-        get(add)  ->
+        get         ->  channel_detail.html
+        get(add)    ->  channel_add.html
+
+        post(save)  ->  channel_add.html    参数：{"form": data}
     """
     if request.method == "GET":
         if request.GET.get("add"):
@@ -471,18 +473,42 @@ def Channel_manage(request):
             form = Channel_form()
             return render(request, "html/manage/channel_manage/channel_add.html", {"form": form})
 
+        if request.GET.get("edit"):
+            seq_num = request.GET.get("seq_num")
+            form = Channel_form(instance=models.Channel.objects.filter(seq_num=seq_num).first())
+            return render(request, "html/manage/channel_manage/channel_re_edit.html", {"form": form, "re_edit": True})
+
+        if request.GET.get("delete"):
+            seq_num = request.GET.get("seq_num")
+            models.Channel.objects.filter(seq_num=seq_num).first().delete()
+            return JsonResponse({"delete": True})
+
         form = models.Channel.objects.all()
         return render(request, 'html/manage/channel_manage/channel_detail.html', {"form": form})
 
     else:
         if request.POST.get("save"):
-            # 这个是详情页提交表单
+            # 这个是详情页提交表单(第一次编辑)
             data = Channel_form(request.POST, request.FILES)
+            # 如果正确则重定向
             if data.is_valid():
                 # 如果正确则保存
                 data.save()
                 # 返回detail页面
                 return redirect("./channel")
-
             # 否则返回错误信息
             return render(request, "html/manage/channel_manage/channel_add.html", {"form": data})
+
+        if request.POST.get("re_edit"):
+            # 这个是详情页提交表单(再编辑)
+            seq_num = request.POST.get("seq_num")
+            data = Channel_form(request.POST, request.FILES, instance=models.Channel.objects.filter(seq_num=seq_num).first())
+            # 如果正确则重定向
+            if data.is_valid():
+                # 如果正确则保存
+                data.save()
+                # 返回detail页面
+                return redirect("./channel")
+            # 否则返回错误信息
+            return render(request, "html/manage/channel_manage/channel_re_edit.html", {"form": data})
+

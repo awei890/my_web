@@ -7,6 +7,9 @@ class Manager(models.Model):
     name = models.CharField(verbose_name="管理员", max_length=16, unique=True)
     password = models.CharField(verbose_name="管理员密码", max_length=64, unique=True)
 
+# 管理人员名单
+# ————————————————————————————————————————————分割符—————————————————————————————————————————————————————————————————————
+# 动漫系统
 
 class Anime_detail(models.Model):
     '''动漫详情表'''
@@ -42,7 +45,7 @@ class Channel(models.Model):
     auther = models.CharField(verbose_name='作者', max_length=16)
     subscribe = models.BigIntegerField(verbose_name='订阅')
     image = models.ImageField(verbose_name='频道图片')
-    seq_num = models.BigIntegerField(verbose_name='序列号')
+    seq_num = models.BigIntegerField(verbose_name='序列号',unique=True)
 
 
 class Collections(models.Model):

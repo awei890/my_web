@@ -242,6 +242,7 @@ def episode(request, num):
 # 动漫页管理
 # —————————————————————————————————————————————————————分割符————————————————————————————————————————————————————————————
 # 用户或管理员账号管理
+
 def manage(request):
     '''
     管理页面详情页
@@ -464,8 +465,11 @@ def Channel_manage(request):
     res:
         get         ->  channel_detail.html
         get(add)    ->  channel_add.html
+        get(edit)   ->  channel_re_edit.html
+        get(delete) ->  {"delete": True}
 
         post(save)  ->  channel_add.html    参数：{"form": data}
+        post(re_edit)   ->  channel_re_edit.html
     """
     if request.method == "GET":
         if request.GET.get("add"):

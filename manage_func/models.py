@@ -7,12 +7,21 @@ class Manager(models.Model):
     name = models.CharField(verbose_name="管理员", max_length=16, unique=True)
     password = models.CharField(verbose_name="管理员密码", max_length=64, unique=True)
 
+    def __str__(self):
+        # 给django后台管理单个object重新命名
+        return self.name
+
+    class Meta:
+        # 给django后台管理单个模型重新命名
+        verbose_name_plural = verbose_name = "自己写管理系统的管理员的名单(已废弃)"
+
 # 管理人员名单
 # ————————————————————————————————————————————分割符—————————————————————————————————————————————————————————————————————
 # 动漫系统
 
 class Anime_detail(models.Model):
     '''动漫详情表'''
+
     name = models.CharField(verbose_name="动漫名", max_length=64, unique=True)
     store_number = models.PositiveIntegerField(verbose_name="存贮号", unique=True)
     released_time = models.CharField(verbose_name="上映时间", null=True, max_length=32)
@@ -24,6 +33,13 @@ class Anime_detail(models.Model):
     ani_url = models.URLField(verbose_name="视频详情页链接", null=True, default=None)
     introduction = models.TextField(verbose_name="简介", max_length=256)
 
+    def __str__(self):
+        # 给django后台管理单个object重新命名
+        return self.name
+
+    class Meta:
+        # 给django后台管理单个模型重新命名
+        verbose_name_plural = verbose_name = "动漫详情表"
 
 class Anime_episode(models.Model):
     '''动漫集数表'''
@@ -33,7 +49,8 @@ class Anime_episode(models.Model):
     episode = models.CharField(verbose_name="集数", max_length=16)
     episode_url = models.CharField(verbose_name="视频地址", max_length=516)
 
-
+    class Meta:
+        verbose_name_plural = verbose_name = "动漫集数表"
 # 动漫系统
 # ————————————————————————————————————————————分割符—————————————————————————————————————————————————————————————————————
 # 博客系统
@@ -47,13 +64,17 @@ class Channel(models.Model):
     image = models.ImageField(verbose_name='频道图片')
     seq_num = models.BigIntegerField(verbose_name='序列号',unique=True)
 
+    class Meta:
+        verbose_name_plural = verbose_name = "频道表"
+
 
 class Collections(models.Model):
     '''合集表'''
     name = models.CharField(verbose_name='合集名称', max_length=16)
     link = models.ForeignKey(verbose_name='外键链接频道', to=Channel, on_delete=models.CASCADE,
                              related_name="Collections")
-
+    class Meta:
+        verbose_name_plural = verbose_name = "合集表"
 
 class Blogs(models.Model):
     '''博客表'''
@@ -62,3 +83,6 @@ class Blogs(models.Model):
     up_time = models.DateTimeField(verbose_name='更新时间')
     content = models.TextField(verbose_name='文章内容')
     link = models.ForeignKey(verbose_name="外键链接合集", to=Collections, on_delete=models.CASCADE, related_name="blog")
+
+    class Meta:
+        verbose_name_plural = verbose_name = "博客表"

@@ -19,9 +19,9 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('index/', include('basic_func.urls')),
+    path('anime/', include('anime_func.urls')),
     # path('manage/', include('manage_func.urls')),
     # 转用后台管理系统，故不再使用
     path("forum/", include("forum_func.urls")),
-    path('stationmaster/', include("stationmaster.urls")),
+    path('index/', include("stationmaster.urls")),
 ]

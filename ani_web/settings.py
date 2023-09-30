@@ -35,8 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'basic_func',
     'manage_func',
+    'anime_func',
     "forum_func",
     "stationmaster",
 ]
@@ -49,8 +49,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'basic_func.middleware.auth.User_login',
-    'basic_func.middleware.auth.Manage_login',
+    # 'anime_func.middleware.auth.User_login',
+    # 'anime_func.middleware.auth.Manage_login',
 ]
 
 ROOT_URLCONF = 'ani_web.urls'
@@ -58,7 +58,9 @@ ROOT_URLCONF = 'ani_web.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "static")],
+        'DIRS': [
+            # os.path.join(BASE_DIR, "static"),  # 只会在static这里找templates
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,9 +122,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+# 静态文件,一般是img,js,css {% static 'xxx' %}
+
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 # Default primary key field type-

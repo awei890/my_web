@@ -64,7 +64,8 @@ def video_page(request, num, source):
     res:
         get -> video_page.html      参数：{"ani_data"(详情页表对象): data,
                                           "episodes(此动漫集数所有表对象)": episodes,
-                                          "now_episode"(当前集数对象): now_episode}
+                                          "now_episode"(当前集数对象): now_episode,
+                                          "now_url"(video的url): url}
     '''
     # 拿到参数
     episode = request.GET.get("episode")

@@ -35,10 +35,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'manage_func',
+    "stationmaster",
     'anime_func',
     "forum_func",
-    "stationmaster",
 ]
 
 MIDDLEWARE = [

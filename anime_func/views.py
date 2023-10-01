@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from anime_func import models
-from static.plugins.video_url import yinghua
+from anime_func.utils import yinghua
 
 
 def index(request):

@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django.shortcuts import render, redirect
-from manage_func import models
+from stationmaster import models
 
 
 # Create your views here.

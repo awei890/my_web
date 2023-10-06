@@ -1,7 +1,10 @@
+import random
+
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from anime_func import models
 from anime_func.utils import yinghua
+from django.db.models import Q
 
 
 def index(request):
@@ -24,8 +27,21 @@ def index(request):
         return render(request, "./search.html",
                       {"search_detail": data, "search_name": name, "nothing": nothing})
 
+    # 拿到week_tags的星期一到星期天
+    update_anime = models.week_tags.objects.filter(~Q(week="0")) # 反向过滤week=0，即week不等于0的
+    # 创建一个字典储存数据
+    json_data = dict()
+
+    for index, item in enumerate(update_anime):
+        # 循环加入星期一到星期天 每天所有的动漫对象
+        json_data["week{}".format(index + 1)] = item.animes.all()
+        print(item.animes.all())
+
+    # 动漫列表展示的数据
     data = models.Anime_detail.objects.all()
-    return render(request, './ani_index.html', {"ani_detail": data})
+    num = random.randint(1, data.count())
+    json_data["ani_detail"] = data.filter(id=num)
+    return render(request, './ani_index.html', json_data)
 
 
 def detail_page_default(request, num):

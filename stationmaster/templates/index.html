@@ -1,5 +1,97 @@
 {% extends 'Navigator_Bar.html' %}
 
+{% block css %}
+<style>
+    .font{
+    font-size:15px;
+}
+
+</style>
+{% endblock %}
+
+
 {% block mainbody %}
-<h1>这是我的首页</h1>
+<div>
+    <div class="jumbotron" style="margin-top:0px;">
+        <div class="container">
+            <h1>你好，欢迎来到我的网站</h1>
+            <p>
+                传闻在盘古开天辟地之时，耶稣指派一个人说：你去建一个网站吧。于是，此网站便有了index.html。随后，神说：一个html是不够的，去再多建一点吧。那个人跪下身来，恭敬的说：干你娘。
+            </p>
+            <p>
+                随后尽管风云飘荡，但得益于他对自身的剥削，完成了网站的资本积累，此网站也就有了除index的许多其他模块
+            </p>
+            <p><a class="btn btn-primary btn-lg" href="#" role="button">你这说的什么鬼东西</a></p>
+        </div>
+    </div>
+
+    <div class="col-md-2" style="">
+        <!--        <div class="panel panel-default">-->
+        <!--            <div class="panel-body">-->
+        <!--                Panel content-->
+        <!--            </div>-->
+        <!--        </div>-->
+
+    </div>
+    <div class="col-md-8" style="">
+        <div>
+            <h1 style="margin-bottom:20px;">个人情况</h1>
+
+            <hr>
+
+            <div>
+
+            </div>
+            <div>
+                <h4>姓名：枕前的老纱布</h4>
+                <h4>做啥的：</h4>
+                <ul>
+                    <li class="font">django</li>
+                    <li class="font">爬虫</li>
+                </ul>
+                <h4>我可以为您提供啥服务：</h4>
+                <ul>
+                    <li class="font">简单为你做一个网站</li>
+                    <li class="font">为你爬取一些数据</li>
+                </ul>
+                <h4>联系方式：</h4>
+                <ul>
+                    <li class="font"></li>
+                    <li class="font"></li>
+                </ul>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h2>动漫模块</h2>
+                <p>
+                    得益于对爬虫技术的日益了解，我的脑细胞开始对一些传统的资源进行爬取整合。没有人知道原因，可能只是作者是一个死肥宅而已。</p>
+                <p>我超，二次元。</p>
+                <p><a class="btn btn-default" href="/anime" role="button">动漫首页 »</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>论坛模块</h2>
+                <p>404 Not Found</p>
+                <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>未来可期模块</h2>
+                <p>未来会做啥？</p>
+                <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <!--        <div class="panel panel-default">-->
+        <!--            <div class="panel-body">-->
+        <!--                Panel content-->
+        <!--            </div>-->
+        <!--        </div>-->
+    </div>
+</div>
+
 {% endblock %}

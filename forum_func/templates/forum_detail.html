@@ -1,0 +1,46 @@
+{% extends 'Navigator_Bar.html'%}
+
+{% block mainbody %}
+<div class="container-fluid" style="padding:0px;">
+    <div class="panel panel-default" style="border-radius:0px;">
+        <div class="panel-body">
+
+        </div>
+    </div>
+</div>
+<div class="container" style="margin-top:20px;">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div>
+                <h2>{{ channel.name }}</h2>
+                <h5>作者：{{ channel.auther }}</h5>
+                <p>
+                    简介：{{ channel.sign }}
+                </p>
+            </div>
+
+            <hr>
+
+            <div>
+                <ul class="media-list">
+                    {% for item in collections %}
+                    <a href="./{{ channel.seq_num }}/{{ item.name }}">
+                        <li class="media">
+                            <div class="media-left">
+<!--                                <img class="media-object" src="..." alt="...">-->
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">{{ item.name }}</h4>
+                                <p>xxxx</p>
+                            </div>
+                        </li>
+                    </a>
+                    {% endfor %}
+                </ul>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+{% endblock %}

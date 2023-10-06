@@ -6,99 +6,235 @@
         color:#31708f;
     }
 
+
 </style>
 {% endblock %}
 
 {% block mainbody %}
-<div class="container-fluid">
-    <form class="col-xs-offset-1 col-xs-10 main" style="margin-top:20px" id="search-box" method="get">
-        <div class="col-md-11 col-xs-10" style="padding-left:0px;">
-            <input type="text" class="form-control" placeholder="查找" name="search">
-        </div>
-        <button type="submit" class="col-md-1 col-xs-2 btn btn-primary">确认</button>
-    </form>
-
-    <div class="col-xs-offset-1 col-xs-10 main" style="margin-top:50px">
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-            </ol>
-
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                    <img data-src="holder.js/900x500/auto/#555:#333/text:Third slide" alt="Third slide [900x500]"
-                         src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDkwMCA1MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzkwMHg1MDAvYXV0by8jNTU1OiMzMzMvdGV4dDpUaGlyZCBzbGlkZQpDcmVhdGVkIHdpdGggSG9sZGVyLmpzIDIuNi4wLgpMZWFybiBtb3JlIGF0IGh0dHA6Ly9ob2xkZXJqcy5jb20KKGMpIDIwMTItMjAxNSBJdmFuIE1hbG9waW5za3kgLSBodHRwOi8vaW1za3kuY28KLS0+PGRlZnM+PHN0eWxlIHR5cGU9InRleHQvY3NzIj48IVtDREFUQVsjaG9sZGVyXzE4OTliOWJlMmQ3IHRleHQgeyBmaWxsOiMzMzM7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6NDVwdCB9IF1dPjwvc3R5bGU+PC9kZWZzPjxnIGlkPSJob2xkZXJfMTg5OWI5YmUyZDciPjxyZWN0IHdpZHRoPSI5MDAiIGhlaWdodD0iNTAwIiBmaWxsPSIjNTU1Ii8+PGc+PHRleHQgeD0iMjk4LjMxMjUiIHk9IjI3MC4xIj5UaGlyZCBzbGlkZTwvdGV4dD48L2c+PC9nPjwvc3ZnPg=="
-                         data-holder-rendered="true"
-                         style="padding:0px;"
-                         class="container"
-                    >
-                    <div class="carousel-caption">
-                        ...
-                    </div>
-                </div>
-
-                <div class="item">
-                    <img data-src="holder.js/900x500/auto/#666:#444/text:Second slide" alt="Second slide [900x500]"
-                         src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDkwMCA1MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzkwMHg1MDAvYXV0by8jNjY2OiM0NDQvdGV4dDpTZWNvbmQgc2xpZGUKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xODk5YjliY2VhZiB0ZXh0IHsgZmlsbDojNDQ0O2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjQ1cHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE4OTliOWJjZWFmIj48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzY2NiIvPjxnPjx0ZXh0IHg9IjI2NC45NDUzMTI1IiB5PSIyNzAuMSI+U2Vjb25kIHNsaWRlPC90ZXh0PjwvZz48L2c+PC9zdmc+"
-                         data-holder-rendered="true"
-                         style="padding:0px;"
-                         class="container">
-                    <div class="carousel-caption">
-                        ...
-                    </div>
-                </div>
-
-                <div class="item">
-                    <img data-src="holder.js/900x500/auto/#555:#333/text:Third slide" alt="Third slide [900x500]"
-                         src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDkwMCA1MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzkwMHg1MDAvYXV0by8jNTU1OiMzMzMvdGV4dDpUaGlyZCBzbGlkZQpDcmVhdGVkIHdpdGggSG9sZGVyLmpzIDIuNi4wLgpMZWFybiBtb3JlIGF0IGh0dHA6Ly9ob2xkZXJqcy5jb20KKGMpIDIwMTItMjAxNSBJdmFuIE1hbG9waW5za3kgLSBodHRwOi8vaW1za3kuY28KLS0+PGRlZnM+PHN0eWxlIHR5cGU9InRleHQvY3NzIj48IVtDREFUQVsjaG9sZGVyXzE4OTliYTA1ZDgxIHRleHQgeyBmaWxsOiMzMzM7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6NDVwdCB9IF1dPjwvc3R5bGU+PC9kZWZzPjxnIGlkPSJob2xkZXJfMTg5OWJhMDVkODEiPjxyZWN0IHdpZHRoPSI5MDAiIGhlaWdodD0iNTAwIiBmaWxsPSIjNTU1Ii8+PGc+PHRleHQgeD0iMjk4LjMxMjUiIHk9IjI3MC4xIj5UaGlyZCBzbGlkZTwvdGV4dD48L2c+PC9nPjwvc3ZnPg=="
-                         data-holder-rendered="true"
-                         style="padding:0px;"
-                         class="container">
-                    <div class="carousel-caption">
-                        ...
-                    </div>
-                </div>
-
+<div class="container-fluid" style="margin-top:20px;">
+    <div class="col-xs-12 col-md-offset-1 col-md-10 panel panel-default" style="border:none;">
+        <form method="get">
+            <div class="col-md-11 col-xs-10" style="padding-left:0px;">
+                <input type="text" class="form-control" placeholder="查找" name="search">
             </div>
+            <button type="submit" class="col-md-1 col-xs-2 btn btn-primary">确认</button>
+        </form>
+    </div>
+    <div class="col-xs-12 col-md-offset-1 col-md-10 panel panel-default"
+         style="border:none;">
+        <div class="col-md-9" style="padding:0px;">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                </ol>
 
-            <!-- Controls -->
-            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <img data-src="holder.js/900x500/auto/#555:#333/text:Third slide" alt="Third slide [900x500]"
+                             src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDkwMCA1MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzkwMHg1MDAvYXV0by8jNTU1OiMzMzMvdGV4dDpUaGlyZCBzbGlkZQpDcmVhdGVkIHdpdGggSG9sZGVyLmpzIDIuNi4wLgpMZWFybiBtb3JlIGF0IGh0dHA6Ly9ob2xkZXJqcy5jb20KKGMpIDIwMTItMjAxNSBJdmFuIE1hbG9waW5za3kgLSBodHRwOi8vaW1za3kuY28KLS0+PGRlZnM+PHN0eWxlIHR5cGU9InRleHQvY3NzIj48IVtDREFUQVsjaG9sZGVyXzE4OTliOWJlMmQ3IHRleHQgeyBmaWxsOiMzMzM7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6NDVwdCB9IF1dPjwvc3R5bGU+PC9kZWZzPjxnIGlkPSJob2xkZXJfMTg5OWI5YmUyZDciPjxyZWN0IHdpZHRoPSI5MDAiIGhlaWdodD0iNTAwIiBmaWxsPSIjNTU1Ii8+PGc+PHRleHQgeD0iMjk4LjMxMjUiIHk9IjI3MC4xIj5UaGlyZCBzbGlkZTwvdGV4dD48L2c+PC9nPjwvc3ZnPg=="
+                             data-holder-rendered="true"
+                             style="padding:0px;"
+                             class="container"
+                        >
+                        <div class="carousel-caption">
+                            ...
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <img data-src="holder.js/900x500/auto/#666:#444/text:Second slide" alt="Second slide [900x500]"
+                             src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDkwMCA1MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzkwMHg1MDAvYXV0by8jNjY2OiM0NDQvdGV4dDpTZWNvbmQgc2xpZGUKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xODk5YjliY2VhZiB0ZXh0IHsgZmlsbDojNDQ0O2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjQ1cHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE4OTliOWJjZWFmIj48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzY2NiIvPjxnPjx0ZXh0IHg9IjI2NC45NDUzMTI1IiB5PSIyNzAuMSI+U2Vjb25kIHNsaWRlPC90ZXh0PjwvZz48L2c+PC9zdmc+"
+                             data-holder-rendered="true"
+                             style="padding:0px;"
+                             class="container">
+                        <div class="carousel-caption">
+                            ...
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <img data-src="holder.js/900x500/auto/#555:#333/text:Third slide" alt="Third slide [900x500]"
+                             src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDkwMCA1MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzkwMHg1MDAvYXV0by8jNTU1OiMzMzMvdGV4dDpUaGlyZCBzbGlkZQpDcmVhdGVkIHdpdGggSG9sZGVyLmpzIDIuNi4wLgpMZWFybiBtb3JlIGF0IGh0dHA6Ly9ob2xkZXJqcy5jb20KKGMpIDIwMTItMjAxNSBJdmFuIE1hbG9waW5za3kgLSBodHRwOi8vaW1za3kuY28KLS0+PGRlZnM+PHN0eWxlIHR5cGU9InRleHQvY3NzIj48IVtDREFUQVsjaG9sZGVyXzE4OTliYTA1ZDgxIHRleHQgeyBmaWxsOiMzMzM7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6NDVwdCB9IF1dPjwvc3R5bGU+PC9kZWZzPjxnIGlkPSJob2xkZXJfMTg5OWJhMDVkODEiPjxyZWN0IHdpZHRoPSI5MDAiIGhlaWdodD0iNTAwIiBmaWxsPSIjNTU1Ii8+PGc+PHRleHQgeD0iMjk4LjMxMjUiIHk9IjI3MC4xIj5UaGlyZCBzbGlkZTwvdGV4dD48L2c+PC9nPjwvc3ZnPg=="
+                             data-holder-rendered="true"
+                             style="padding:0px;"
+                             class="container">
+                        <div class="carousel-caption">
+                            ...
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Controls -->
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3 hidden-xs hidden-sm" style="height:100%;">
+            <h4>推荐</h4>
+            <div>
+                <a href="">
+                    <img class="col-xs-6" src="">
+                </a>
+            </div>
         </div>
     </div>
 
-    <div class="col-xs-offset-1 col-xs-10 main" style="margin-top:50px">
+    <div class="col-xs-12 col-md-offset-1 col-md-10 panel panel-default" style="border:none;">
         <div class="panel panel-default">
-            <div class="btn-group btn-group-justified" role="group" aria-label="..." style="">
-                <ol class="breadcrumb" style="text-align:center; background-color:#d9edf7;">
-                    <li><a class="week now" id="w1" href="#">周一</a></li>
-                    <li><a class="week" id="w2" href="#" style="color:black;">周二</a></li>
-                    <li><a class="week" id="w3" href="#" style="color:black;">周三</a></li>
-                    <li><a class="week" id="w4" href="#" style="color:black;">周四</a></li>
-                    <li><a class="week" id="w5" href="#" style="color:black;">周五</a></li>
-                    <li><a class="week" id="w6" href="#" style="color:black;">周六</a></li>
-                    <li><a class="week" id="w7" href="#" style="color:black;">周日</a></li>
-                </ol>
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    每周更新
+                </h3>
             </div>
-
             <div class="panel-body">
-                <div style="overflow:scroll; overflow-y:hidden;">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" id="weektabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#week1" role="tab" data-toggle="tab">周一</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#week2" role="tab" data-toggle="tab">周二</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#week3" role="tab" data-toggle="tab">周三</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#week4" role="tab" data-toggle="tab">周四</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#week5" role="tab" data-toggle="tab">周五</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#week6" role="tab" data-toggle="tab">周六</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#week7" role="tab" data-toggle="tab">周日</a>
+                    </li>
+                </ul>
 
+                <!-- Tab panes -->
+                <div class="tab-content" style="margin-top:10px;">
+
+                    <div role="tabpanel" class="tab-pane active" id="week1">
+                        {% for item in week1 %}
+                        <div class="col-md-2 col-xs-4 list">
+                            <a href="./{{ item.store_number }}">
+                                <img class="img-responsive center-block" src="{{ item.image }}" alt="未找到图片"
+                                     style="border-radius:5px;">
+                                <div class="caption" style="color:black;">
+                                    <p class="name one-line" style="text-align:center;">
+                                        {{ item.name }}</p>
+                                </div>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane active" id="week2">
+                        {% for item in week2 %}
+                        <div class="col-md-2 col-xs-4 list">
+                            <a href="./{{ item.store_number }}">
+                                <img class="img-responsive center-block" src="{{ item.image }}" alt="未找到图片"
+                                     style="border-radius:5px;">
+                                <div class="caption" style="color:black;">
+                                    <p class="name one-line" style="text-align:center;">
+                                        {{ item.name }}</p>
+                                </div>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane active" id="week3">
+                        {% for item in week3 %}
+                        <div class="col-md-2 col-xs-4 list">
+                            <a href="./{{ item.store_number }}">
+                                <img class="img-responsive center-block" src="{{ item.image }}" alt="未找到图片"
+                                     style="border-radius:5px;">
+                                <div class="caption" style="color:black;">
+                                    <p class="name one-line" style="text-align:center;">
+                                        {{ item.name }}</p>
+                                </div>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane active" id="week4">
+                        {% for item in week4 %}
+                        <div class="col-md-2 col-xs-4 list">
+                            <a href="./{{ item.store_number }}">
+                                <img class="img-responsive center-block" src="{{ item.image }}" alt="未找到图片"
+                                     style="border-radius:5px;">
+                                <div class="caption" style="color:black;">
+                                    <p class="name one-line" style="text-align:center;">
+                                        {{ item.name }}</p>
+                                </div>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane active" id="week5">
+                        {% for item in week5 %}
+                        <div class="col-md-2 col-xs-4 list">
+                            <a href="./{{ item.store_number }}">
+                                <img class="img-responsive center-block" src="{{ item.image }}" alt="未找到图片"
+                                     style="border-radius:5px;">
+                                <div class="caption" style="color:black;">
+                                    <p class="name one-line" style="text-align:center;">
+                                        {{ item.name }}</p>
+                                </div>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane active" id="week6">
+                        {% for item in week6 %}
+                        <div class="col-md-2 col-xs-4 list">
+                            <a href="./{{ item.store_number }}">
+                                <img class="img-responsive center-block" src="{{ item.image }}" alt="未找到图片"
+                                     style="border-radius:5px;">
+                                <div class="caption" style="color:black;">
+                                    <p class="name one-line" style="text-align:center;">
+                                        {{ item.name }}</p>
+                                </div>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane active" id="week7" >
+                        {% for item in week7 %}
+                        <div class="col-md-2 col-xs-4 list">
+                            <a href="./{{ item.store_number }}">
+                                <img class="img-responsive center-block" src="{{ item.image }}" alt="未找到图片"
+                                     style="border-radius:5px;">
+                                <div class="caption" style="color:black;">
+                                    <p class="name one-line" style="text-align:center;">
+                                        {{ item.name }}</p>
+                                </div>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="panel panel-info">
+        <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">
                     <span>动漫列表</span>
@@ -106,29 +242,19 @@
                 </h3>
             </div>
             <div class="panel-body">
-                <div class="row">
-                    {% for item in ani_detail %}
-                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4 list">
-                        <div class="thumbnail">
-                            <img class="img-responsive center-block" src="{{ item.image }}" alt="未找到图片">
-                            <div class="caption" style="padding:2px;">
-                                <p class="name one-line">
-                                    {{ item.name }}</p>
-                                <p class="btn-div"
-                                   style="text-align-last:justify">
-                                    <a href="./{{ item.store_number }}"
-                                       class="btn btn-primary watch"
-                                       role="button">观看</a>
-
-                                    <a href="#"
-                                       class="btn btn-default discussion"
-                                       role="button">讨论</a>
-                                </p>
-                            </div>
+                {% for item in ani_detail %}
+                <div class="col-md-2 col-xs-4 list">
+                    <a href="./{{ item.store_number }}">
+                        <img class="img-responsive center-block" src="{{ item.image }}" alt="未找到图片"
+                             style="border-radius:5px;">
+                        <div class="caption" style="color:black;">
+                            <p class="name one-line" style="text-align:center;">
+                                {{ item.name }}</p>
                         </div>
-                    </div>
-                    {% endfor %}
+                    </a>
                 </div>
+                {% endfor %}
+
             </div>
         </div>
     </div>
@@ -143,19 +269,11 @@
 
     <!--当窗口宽度小于750px时，去除外边距(即:col-xs)-->
     if(win < 750){
-        <!--整体内容间距调整-->
-        $(".main").css({"margin-top":"8px"})
-        $(".main").removeClass("col-xs-offset-1")
-        $(".main").removeClass("col-xs-10")
-
-        <!--搜索框调整-->
-        $("#search-box").css({"overflow":"hidden","clear":"both"})
-
         <!--动漫展示表改变-->
         $(".list").css({"padding":"0px 4px"})
 
         <!--调整图片比为9/16-->
-        var img_height = $(".caption").width() / 9 * 14
+        var img_height = $(".list").width() / 9 * 14
         $(".img-responsive").css({"height":img_height})
 
         <!--按钮栏<p>调整-->
@@ -173,18 +291,15 @@
         $(".img-responsive").css({"height":img_height})
     };
 
-    <!--这个是星期的js-->
-    $(".week").click(function(){
-        $(".week").each(function(){
-            $(this).removeClass("now")
-            $(this).css({"color":"black"})
-        })
-
-        $(this).removeAttr("style")
-        $(this).addClass("now")
-    });
-
     <!--导航栏聚焦-->
     $("#ani").addClass("active");
+
+    <!--显示今天更新-->
+    var days = new Date().getDay();
+    if (days == 0) { days == 7 };
+    days -= 1
+    $(`#weektabs li:eq(${days}) a`).tab('show')
+
+
 </script>
 {% endblock %}

@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 class Channel(models.Model):
     '''频道表'''
@@ -7,9 +8,8 @@ class Channel(models.Model):
     sign = models.CharField(verbose_name="简述", max_length=64)
     auther = models.CharField(verbose_name='作者', max_length=16)
     subscribe = models.BigIntegerField(verbose_name='订阅')
-    image = models.ImageField(verbose_name='频道图片')
+    image = models.ImageField(verbose_name='频道图片', upload_to="static/img")
     seq_num = models.BigIntegerField(verbose_name='序列号', unique=True)
-
 
     class Meta:
         verbose_name_plural = verbose_name = "频道表"

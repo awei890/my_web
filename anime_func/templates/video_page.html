@@ -1,12 +1,12 @@
 {% extends 'Navigator_Bar.html' %}
 
 {% block mainbody %}
-<h2 class="col-xs-12 col-sm-offset-1 col-sm-10 container one-line" style="padding:0px;">{{ ani_data.name }}</h2>
+<h2 class="col-xs-12 col-sm-offset-1 col-sm-10 container one-line" style="padding:0px; margin-top:20px;">{{ ani_data.name }}</h2>
 <h4 class="col-xs-12 col-sm-offset-1 col-sm-10" style="padding:0px;">正在播放：第{{ now_episode.episode }}集</h4>
 <div class="col-xs-12 col-sm-offset-1 col-sm-10" style="padding:0px;">
     <div class="embed-responsive embed-responsive-16by9">
         <!--<video src="{{ now_episode.episode_url }}" controls="controls"></video>-->
-        <!--<iframe src="{{ now_url }}"></iframe>-->
+        <iframe src="{{ now_url }}"></iframe>
     </div>
 </div>
 

@@ -2,6 +2,27 @@ from django.db import models
 
 
 # Create your models here.
+
+class week_tags(models.Model):
+    week_choice = [("0", "不是更新"),
+                   ("1", "星期一"),
+                   ("2", "星期二"),
+                   ("3", "星期三"),
+                   ("4", "星期四"),
+                   ("5", "星期五"),
+                   ("6", "星期六"),
+                   ("7", "星期日"), ]
+    '''周更表'''
+    week = models.CharField(verbose_name="星期", max_length=64, unique=True, choices=week_choice)
+
+    def __str__(self):
+        return "{}".format(self.week)
+
+    class Meta:
+        # 给django后台管理单个模型重新命名
+        verbose_name_plural = verbose_name = "周更表tags"
+
+
 class Anime_detail(models.Model):
     '''动漫详情表'''
 
@@ -15,6 +36,8 @@ class Anime_detail(models.Model):
     image = models.CharField(verbose_name="图片", max_length=1024)
     ani_url = models.URLField(verbose_name="视频详情页链接", null=True, default=None)
     introduction = models.TextField(verbose_name="简介", max_length=256)
+
+    link_week = models.ManyToManyField(to=week_tags, related_name="animes")
 
     def __str__(self):
         return "{}".format(self.name)
@@ -31,6 +54,9 @@ class Anime_episode(models.Model):
     source_num = models.IntegerField(verbose_name="来源的储存号")
     episode = models.CharField(verbose_name="集数", max_length=16)
     episode_url = models.CharField(verbose_name="视频地址", max_length=516)
+
+    def __str__(self):
+        return "{}-{}".format(self.link.name, self.episode)
 
     class Meta:
         verbose_name_plural = verbose_name = "动漫集数表"

@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'ani_web.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ani_web',
+        'NAME': 'project_web',
         "USER": "root",
         "PASSWORD": "",
         "HOST": "127.0.0.1",

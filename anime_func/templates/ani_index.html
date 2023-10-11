@@ -2,10 +2,29 @@
 
 {% block css %}
 <style>
-    .now{
-        color:#31708f;
+    .scroll-father{
+        white-space: nowrap;
+        overflow-x: scroll;
+        overflow-y: hidden;
     }
 
+    .scroll-child{
+        text-align: center;
+        white-space: nowrap;
+        display: inline-block;
+    }
+
+    @media screen and (min-width:750px) {
+        .panes{
+            width:10vw;
+        }
+    }
+
+    @media screen and (max-width:750px) {
+        .panes{
+            width:20vw;
+        }
+    }
 
 </style>
 {% endblock %}
@@ -20,9 +39,8 @@
             <button type="submit" class="col-md-1 col-xs-2 btn btn-primary">确认</button>
         </form>
     </div>
-    <div class="col-xs-12 col-md-offset-1 col-md-10 panel panel-default"
-         style="border:none;">
-        <div class="col-md-9" style="padding:0px;">
+    <div class="col-xs-12 col-md-offset-1 col-md-10 panel panel-default" style="border:none;">
+        <div class="col-xs-12" style="padding:0px;">
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
@@ -80,182 +98,168 @@
                 </a>
             </div>
         </div>
-        <div class="col-md-3 hidden-xs hidden-sm" style="height:100%;">
-            <h4>推荐</h4>
-            <div>
-                <a href="">
-                    <img class="col-xs-6" src="">
-                </a>
+    </div>
+
+    <div class="col-xs-12 col-md-offset-1 col-md-10 panel panel-default" style="border:none;">
+        <div class="panel-body" style="padding:0px;">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" id="weektabs" role="tablist" style="white-space: nowrap; overflow-x: auto; overflow-y:hidden;">
+                <li role="presentation" style="display: inline-block; float: none;">
+                    <a href="#week1" role="tab" data-toggle="tab">周一</a>
+                </li>
+                <li role="presentation" style="display: inline-block; float: none;">
+                    <a href="#week2" role="tab" data-toggle="tab">周二</a>
+                </li>
+                <li role="presentation" style="display: inline-block; float: none;">
+                    <a href="#week3" role="tab" data-toggle="tab">周三</a>
+                </li>
+                <li role="presentation" style="display: inline-block; float: none;">
+                    <a href="#week4" role="tab" data-toggle="tab">周四</a>
+                </li>
+                <li role="presentation" style="display: inline-block; float: none;">
+                    <a href="#week5" role="tab" data-toggle="tab">周五</a>
+                </li>
+                <li role="presentation" style="display: inline-block; float: none;">
+                    <a href="#week6" role="tab" data-toggle="tab">周六</a>
+                </li>
+                <li role="presentation" style="display: inline-block; float: none;">
+                    <a href="#week7" role="tab" data-toggle="tab">周日</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content" style="margin-top:10px;">
+
+                <div role="tabpanel" class="tab-pane active scroll-father" id="week1">
+                    {% for item in week1 %}
+                    <div class="list scroll-child panes">
+                        <a href="./{{ item.store_number }}">
+                            <img class="img-responsive center-block" src="{{ item.image }}" alt="未找到图片"
+                                 style="border-radius:5px;">
+                            <div class="caption" style="color:black;">
+                                <p class="name one-line" style="text-align:center;">
+                                    {{ item.name }}</p>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div role="tabpanel" class="tab-pane active scroll-father" id="week2">
+                    {% for item in week2 %}
+                    <div class="list scroll-child panes">
+                        <a href="./{{ item.store_number }}">
+                            <img class="img-responsive center-block" src="{{ item.image }}" alt="未找到图片"
+                                 style="border-radius:5px;">
+                            <div class="caption" style="color:black;">
+                                <p class="name one-line" style="text-align:center;">
+                                    {{ item.name }}</p>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div role="tabpanel" class="tab-pane active scroll-father" id="week3">
+                    {% for item in week3 %}
+                    <div class="list scroll-child panes">
+                        <a href="./{{ item.store_number }}">
+                            <img class="img-responsive center-block" src="{{ item.image }}" alt="未找到图片"
+                                 style="border-radius:5px;">
+                            <div class="caption" style="color:black;">
+                                <p class="name one-line" style="text-align:center;">
+                                    {{ item.name }}</p>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div role="tabpanel" class="tab-pane active scroll-father" id="week4">
+                    {% for item in week4 %}
+                    <div class="list scroll-child panes">
+                        <a href="./{{ item.store_number }}">
+                            <img class="img-responsive center-block" src="{{ item.image }}" alt="未找到图片"
+                                 style="border-radius:5px;">
+                            <div class="caption" style="color:black;">
+                                <p class="name one-line" style="text-align:center;">
+                                    {{ item.name }}</p>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div role="tabpanel" class="tab-pane active scroll-father" id="week5">
+                    {% for item in week5 %}
+                    <div class="list scroll-child panes">
+                        <a href="./{{ item.store_number }}">
+                            <img class="img-responsive center-block" src="{{ item.image }}" alt="未找到图片"
+                                 style="border-radius:5px;">
+                            <div class="caption" style="color:black;">
+                                <p class="name one-line" style="text-align:center;">
+                                    {{ item.name }}</p>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div role="tabpanel" class="tab-pane active scroll-father" id="week6">
+                    {% for item in week6 %}
+                    <div class="list scroll-child panes">
+                        <a href="./{{ item.store_number }}">
+                            <img class="img-responsive center-block" src="{{ item.image }}" alt="未找到图片"
+                                 style="border-radius:5px;">
+                            <div class="caption" style="color:black;">
+                                <p class="name one-line" style="text-align:center;">
+                                    {{ item.name }}</p>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div role="tabpanel" class="tab-pane active scroll-father" id="week7">
+                    {% for item in week7 %}
+                    <div class="list scroll-child panes">
+                        <a href="./{{ item.store_number }}">
+                            <img class="img-responsive center-block" src="{{ item.image }}" alt="未找到图片"
+                                 style="border-radius:5px;">
+                            <div class="caption" style="color:black;">
+                                <p class="name one-line" style="text-align:center;">
+                                    {{ item.name }}</p>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="col-xs-12 col-md-offset-1 col-md-10 panel panel-default" style="border:none;">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    每周更新
-                </h3>
-            </div>
-            <div class="panel-body">
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" id="weektabs" role="tablist">
-                    <li role="presentation" class="active">
-                        <a href="#week1" role="tab" data-toggle="tab">周一</a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#week2" role="tab" data-toggle="tab">周二</a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#week3" role="tab" data-toggle="tab">周三</a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#week4" role="tab" data-toggle="tab">周四</a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#week5" role="tab" data-toggle="tab">周五</a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#week6" role="tab" data-toggle="tab">周六</a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#week7" role="tab" data-toggle="tab">周日</a>
-                    </li>
-                </ul>
-
-                <!-- Tab panes -->
-                <div class="tab-content" style="margin-top:10px;">
-
-                    <div role="tabpanel" class="tab-pane active" id="week1">
-                        {% for item in week1 %}
-                        <div class="col-md-2 col-xs-4 list">
-                            <a href="./{{ item.store_number }}">
-                                <img class="img-responsive center-block" src="{{ item.image }}" alt="未找到图片"
-                                     style="border-radius:5px;">
-                                <div class="caption" style="color:black;">
-                                    <p class="name one-line" style="text-align:center;">
-                                        {{ item.name }}</p>
-                                </div>
-                            </a>
-                        </div>
-                        {% endfor %}
-                    </div>
-
-                    <div role="tabpanel" class="tab-pane active" id="week2">
-                        {% for item in week2 %}
-                        <div class="col-md-2 col-xs-4 list">
-                            <a href="./{{ item.store_number }}">
-                                <img class="img-responsive center-block" src="{{ item.image }}" alt="未找到图片"
-                                     style="border-radius:5px;">
-                                <div class="caption" style="color:black;">
-                                    <p class="name one-line" style="text-align:center;">
-                                        {{ item.name }}</p>
-                                </div>
-                            </a>
-                        </div>
-                        {% endfor %}
-                    </div>
-
-                    <div role="tabpanel" class="tab-pane active" id="week3">
-                        {% for item in week3 %}
-                        <div class="col-md-2 col-xs-4 list">
-                            <a href="./{{ item.store_number }}">
-                                <img class="img-responsive center-block" src="{{ item.image }}" alt="未找到图片"
-                                     style="border-radius:5px;">
-                                <div class="caption" style="color:black;">
-                                    <p class="name one-line" style="text-align:center;">
-                                        {{ item.name }}</p>
-                                </div>
-                            </a>
-                        </div>
-                        {% endfor %}
-                    </div>
-
-                    <div role="tabpanel" class="tab-pane active" id="week4">
-                        {% for item in week4 %}
-                        <div class="col-md-2 col-xs-4 list">
-                            <a href="./{{ item.store_number }}">
-                                <img class="img-responsive center-block" src="{{ item.image }}" alt="未找到图片"
-                                     style="border-radius:5px;">
-                                <div class="caption" style="color:black;">
-                                    <p class="name one-line" style="text-align:center;">
-                                        {{ item.name }}</p>
-                                </div>
-                            </a>
-                        </div>
-                        {% endfor %}
-                    </div>
-
-                    <div role="tabpanel" class="tab-pane active" id="week5">
-                        {% for item in week5 %}
-                        <div class="col-md-2 col-xs-4 list">
-                            <a href="./{{ item.store_number }}">
-                                <img class="img-responsive center-block" src="{{ item.image }}" alt="未找到图片"
-                                     style="border-radius:5px;">
-                                <div class="caption" style="color:black;">
-                                    <p class="name one-line" style="text-align:center;">
-                                        {{ item.name }}</p>
-                                </div>
-                            </a>
-                        </div>
-                        {% endfor %}
-                    </div>
-
-                    <div role="tabpanel" class="tab-pane active" id="week6">
-                        {% for item in week6 %}
-                        <div class="col-md-2 col-xs-4 list">
-                            <a href="./{{ item.store_number }}">
-                                <img class="img-responsive center-block" src="{{ item.image }}" alt="未找到图片"
-                                     style="border-radius:5px;">
-                                <div class="caption" style="color:black;">
-                                    <p class="name one-line" style="text-align:center;">
-                                        {{ item.name }}</p>
-                                </div>
-                            </a>
-                        </div>
-                        {% endfor %}
-                    </div>
-
-                    <div role="tabpanel" class="tab-pane active" id="week7" >
-                        {% for item in week7 %}
-                        <div class="col-md-2 col-xs-4 list">
-                            <a href="./{{ item.store_number }}">
-                                <img class="img-responsive center-block" src="{{ item.image }}" alt="未找到图片"
-                                     style="border-radius:5px;">
-                                <div class="caption" style="color:black;">
-                                    <p class="name one-line" style="text-align:center;">
-                                        {{ item.name }}</p>
-                                </div>
-                            </a>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
+    <div class="col-xs-12 col-md-offset-1 col-md-10 panel panel-default" style="border:none">
+        <div class="panel-title" style="clear:both; overflow:hidden;">
+            <h4 class="col-xs-6" style="text-align:left;">动漫列表</h4>
+            <h4 class="col-xs-6" style="text-align:right;">更多</h4>
         </div>
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    <span>动漫列表</span>
-                    <a href="#" style="float:right">更多</a>
-                </h3>
-            </div>
-            <div class="panel-body">
-                {% for item in ani_detail %}
-                <div class="col-md-2 col-xs-4 list">
-                    <a href="./{{ item.store_number }}">
-                        <img class="img-responsive center-block" src="{{ item.image }}" alt="未找到图片"
-                             style="border-radius:5px;">
-                        <div class="caption" style="color:black;">
-                            <p class="name one-line" style="text-align:center;">
-                                {{ item.name }}</p>
-                        </div>
-                    </a>
-                </div>
-                {% endfor %}
+        <hr style="margin-top:0px;">
 
+        <div class="panel-body" style="padding:0px;">
+            {% for item in ani_detail %}
+            <div class="col-md-2 col-sm-3 col-xs-4 list">
+                <a href="./{{ item.store_number }}">
+                    <img class="img-responsive center-block" src="{{ item.image }}" alt="未找到图片"
+                         style="border-radius:5px;">
+                    <div class="caption" style="color:black;">
+                        <p class="name one-line" style="text-align:center;">
+                            {{ item.name }}</p>
+                    </div>
+                </a>
             </div>
+            {% endfor %}
+
         </div>
     </div>
 </div>
@@ -267,21 +271,11 @@
     <!--现在窗口宽度-->
     var win = $(document).width();
 
-    <!--当窗口宽度小于750px时，去除外边距(即:col-xs)-->
+    <!--当窗口宽度小于750px时-->
     if(win < 750){
-        <!--动漫展示表改变-->
-        $(".list").css({"padding":"0px 4px"})
-
         <!--调整图片比为9/16-->
         var img_height = $(".list").width() / 9 * 14
         $(".img-responsive").css({"height":img_height})
-
-        <!--按钮栏<p>调整-->
-        $(".btn-div").css({"padding-right":"0px","padding-left":"0px"})
-
-        <!--观看按钮和讨论按钮-->
-        $(".watch").css({"padding":"2px 4px","font-size":"10px"})
-        $(".discussion").css({"padding":"2px 4px","font-size":"10px"})
 
         <!--动漫名称大小调整-->
         $(".name").css({"font-size":"12px"})

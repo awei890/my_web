@@ -28,19 +28,19 @@ def index(request):
                       {"search_detail": data, "search_name": name, "nothing": nothing})
 
     # 拿到week_tags的星期一到星期天
-    update_anime = models.week_tags.objects.filter(~Q(week="0")) # 反向过滤week=0，即week不等于0的
+    update_anime = models.week_tags.objects.filter(~Q(week="0"))  # 反向过滤week=0，即week不等于0的
     # 创建一个字典储存数据
     json_data = dict()
 
     for index, item in enumerate(update_anime):
         # 循环加入星期一到星期天 每天所有的动漫对象
         json_data["week{}".format(index + 1)] = item.animes.all()
-        print(item.animes.all())
 
     # 动漫列表展示的数据
     data = models.Anime_detail.objects.all()
-    num = random.randint(1, data.count())
-    json_data["ani_detail"] = data.filter(id=num)
+    # 随机抽取12个动漫进行展示
+    choice_num = [random.randint(1, data.count()) for i in range(12)]
+    json_data["ani_detail"] = data.filter(id__in=choice_num)
     return render(request, './ani_index.html', json_data)
 
 
@@ -101,6 +101,3 @@ def video_page(request, num, source):
     return render(request, './video_page.html',
                   {"ani_data": data, "episodes": episodes, "now_episode": now_episode,
                    "now_url": now_episode_url})
-
-
-

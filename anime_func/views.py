@@ -51,7 +51,7 @@ def detail_page_default(request, num):
         ip/index/(动漫编号[限制数字int])
             num -> 项目编号
     '''
-    return redirect("./{}".format(1))
+    return redirect("./{}/{}".format(num, 1))
 
 
 def detail_page(request, num, source):

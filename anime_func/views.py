@@ -65,7 +65,7 @@ def detail_page(request, num, source):
                                                                         "source": source_data, "now_source": source}
     '''
 
-    data = models.Anime_detail.objects.get(store_number=num)
+    data = models.Anime_detail.objects.get(id=num)
     episodes = data.episode_detail.all().filter(source_num=source)
     return render(request, './detail_page.html',
                   {"ani_data": data, "now_source": source, "episodes": episodes})
@@ -87,7 +87,7 @@ def video_page(request, num, source):
     episode = request.GET.get("episode")
 
     # 拿到此视频的视频详情页的表
-    data = models.Anime_detail.objects.get(store_number=num)
+    data = models.Anime_detail.objects.get(id=num)
     # 拿到集数的表
     eps_data = data.episode_detail.all()
 

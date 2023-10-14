@@ -27,15 +27,16 @@ class Anime_detail(models.Model):
     '''动漫详情表'''
 
     name = models.CharField(verbose_name="动漫名", max_length=64, unique=True)
-    store_number = models.PositiveIntegerField(verbose_name="存贮号", unique=True)
+    other_name = models.CharField(verbose_name="其他名字", max_length=256)
+    store_number = models.PositiveIntegerField(verbose_name="存贮号", null=True, unique=True, default=None)
     released_time = models.CharField(verbose_name="上映时间", null=True, max_length=32)
     language = models.CharField(verbose_name="语言", max_length=8, null=True)
     auther = models.CharField(verbose_name="作者", max_length=32, null=True)
-    status = models.BooleanField(verbose_name="连载状态")
+    status = models.BooleanField(verbose_name="连载状态", default=False)
     region = models.CharField(verbose_name="地区", max_length=16)
     image = models.CharField(verbose_name="图片", max_length=1024)
     ani_url = models.URLField(verbose_name="视频详情页链接", null=True, default=None)
-    introduction = models.TextField(verbose_name="简介", max_length=256)
+    introduction = models.TextField(verbose_name="简介", max_length=1024)
 
     link_week = models.ManyToManyField(to=week_tags, related_name="animes")
 

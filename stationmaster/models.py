@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 class Users(models.Model):
     name = models.CharField(verbose_name="用户名", max_length=64, unique=True, null=False)
@@ -13,3 +14,16 @@ class Users(models.Model):
 
     class Meta:
         verbose_name_plural = verbose_name = "用户表"
+
+
+class Error_log(models.Model):
+    """错误表"""
+    time = models.DateTimeField(verbose_name="记录mysql时间", auto_now=True)
+    error_type = models.CharField(verbose_name="错误类型",max_length=64, choices=[("1", "动漫类型错误")])
+    error_content = models.TextField()
+
+    def __str__(self):
+        return "{}-{}".format(self.time, self.error_type)
+
+    class Meta:
+        verbose_name_plural = verbose_name = "错误表"

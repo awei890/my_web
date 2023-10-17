@@ -1,5 +1,6 @@
 from django.forms import ModelForm
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
 from stationmaster import models
 
 
@@ -93,3 +94,19 @@ def clear(request):
     '''
     request.session.clear()
     return redirect("/index/login")
+
+
+def errors(request):
+    """
+    req:
+        ip/index/errors     传递参数：{type:1, content=错误内容}
+    res:
+        无
+    """
+    type_error = request.GET.get("type")
+    content = request.GET.get("content")
+    models.Error_log.objects.create(
+        error_type=type_error,
+        error_content=content
+    )
+    return JsonResponse({})

@@ -3,7 +3,6 @@ import random
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from anime_func import models
-from anime_func.utils import yinghua
 from django.db.models import Q
 
 
@@ -62,7 +61,7 @@ def detail_page(request, num, source):
             source -> 源编号
     res：
         get(num) -> detail_page.html(这个是模板，内容根据num值添加)   参数：{"ani_detail": data, "episodes": episodes,
-                                                                        "source": source_data, "now_source": source}
+                                                                        "now_source": source}
     '''
 
     data = models.Anime_detail.objects.get(id=num)
@@ -81,7 +80,7 @@ def video_page(request, num, source):
         get -> video_page.html      参数：{"ani_data"(详情页表对象): data,
                                           "episodes(此动漫集数所有表对象)": episodes,
                                           "now_episode"(当前集数对象): now_episode,
-                                          "now_url"(video的url): url}
+                                          }
     '''
     # 拿到参数
     episode = request.GET.get("episode")
@@ -95,9 +94,7 @@ def video_page(request, num, source):
         '''源1的解析'''
         # 拿到此视频具体集数表
         episodes = eps_data.filter(source_num=1)
-        # 拿到现在的集数的url
+        # 拿到现在的集数的表对象
         now_episode = episodes.get(episode=episode)
-        now_episode_url = yinghua.get_url(url=now_episode.episode_url)
     return render(request, './video_page.html',
-                  {"ani_data": data, "episodes": episodes, "now_episode": now_episode,
-                   "now_url": now_episode_url})
+                  {"ani_data": data, "episodes": episodes, "now_episode": now_episode,})

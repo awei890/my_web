@@ -6,12 +6,11 @@
 </h1>
 <div class="container" style="margin-top:10px;">
 
-    <div class="col-sm-4 col-xs-6 image" style="padding:0px;">
+    <div class="col-sm-2 col-xs-5 image" style="padding:0px;">
         <img src="{{ ani_data.image }}" alt="..." class="img-responsive center-block">
     </div>
 
-    <div class="col-sm-8 col-xs-6">
-        <h3 class="one-line" style="padding-bottom:8px; margin-top:5px;">{{ ani_data.name }}</h3>
+    <div class="col-sm-10 col-xs-7">
         <h5>上映：{{ ani_data.released_time }}</h5>
         <h5>语言：{{ ani_data.language }}</h5>
         <h5>作者：{{ ani_data.auther }}</h5>
@@ -40,7 +39,7 @@
             {% for item in episodes %}
             <div class="col-md-1 col-sm-2 col-xs-4" style="padding:5px;">
                 <a href="{{ now_source }}/video?episode={{ item.episode }}">
-                    <button type="button" class="btn btn-default col-xs-12">第{{ item.episode }}集</button>
+                    <button type="button" class="btn btn-default col-xs-12">{{ item.episode }}</button>
                 </a>
             </div>
             {% endfor %}

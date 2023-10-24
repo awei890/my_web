@@ -7,4 +7,5 @@ urlpatterns = [
     path('register', views.register),
     path("clear", views.clear),
     path("errors", views.errors),
+    path("my_blogs", views.my_blogs),
 ]

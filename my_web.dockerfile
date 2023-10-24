@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . /app/
 
 # 安装依赖包
-RUN pip install -r requirement.txt
+RUN pip install -r requirements.txt
 
 # 设置环境变量
 ENV PYTHONUNBUFFERED=1

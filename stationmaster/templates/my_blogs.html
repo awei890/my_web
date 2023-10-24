@@ -1,0 +1,70 @@
+{% extends 'Navigator_Bar.html'%}
+
+{% block mainbody %}
+<div class="jumbotron">
+    <div class="container">
+        <div class="col-xs-12">
+            <h1>欢迎来到我的博客</h1>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2 class="penel-title">分类</h2>
+                    <hr>
+                    <div class="list-group">
+                        <a href="/index/my_blogs" class="list-group-item" style="border:0px;">全部</a>
+                        <a href="?classification=1" class="list-group-item"
+                           style="border:0px;">爬虫</a>
+                        <a href="?classification=2" class="list-group-item"
+                           style="border:0px;">django</a>
+                        <a href="?classification=3" class="list-group-item"
+                           style="border:0px;">前端</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2>博客文章</h2>
+                    <hr>
+                    {% for item in blogs %}
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <a href="?name={{ item.name }}" target="_blank" style="text-decoration:none">
+                                <div class="media" style="color:black">
+                                    <div class="media-left">
+                                        <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xOGI2MGZmNGFiOCB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE4YjYwZmY0YWI4Ij48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxMy4xNzMwMDQxNTAzOTA2MjUiIHk9IjM2LjUiPjY0eDY0PC90ZXh0PjwvZz48L2c+PC9zdmc+">
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">{{ item.name }}</h4>
+                                        <p>{{ item.introduction }}</p>
+                                        <div>
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                            <span>{{ item.date }}</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-2">
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

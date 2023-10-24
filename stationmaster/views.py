@@ -86,6 +86,27 @@ def register(request):
         return render(request, './register.html', {"form": data})
 
 
+def my_blogs(request):
+    '''
+    req:
+        ip/index/my_blogs       如果无参数，返回博客索引页
+                                如果有参数 {“name”:"博客的名字"}
+    res:
+        返回blogposts的html文件
+    '''
+
+    if request.GET.get("name"):
+        name = request.GET.get("name")
+        return render(request, "./blogposts/{}.html".format(name))
+
+    if request.GET.get("classification"):
+        blogs_list = models.my_bolgs.objects.filter(classification=request.GET.get("classification"))
+        return render(request, "my_blogs.html", {"blogs": blogs_list})
+
+    blogs_list = models.my_bolgs.objects.all()
+    return render(request, "my_blogs.html", {"blogs": blogs_list})
+
+
 def clear(request):
     '''
     清除专用,用于清除session

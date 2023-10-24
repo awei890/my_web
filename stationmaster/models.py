@@ -19,7 +19,7 @@ class Users(models.Model):
 class Error_log(models.Model):
     """错误表"""
     time = models.DateTimeField(verbose_name="记录mysql时间", auto_now=True)
-    error_type = models.CharField(verbose_name="错误类型",max_length=64, choices=[("1", "动漫类型错误")])
+    error_type = models.CharField(verbose_name="错误类型", max_length=64, choices=[("1", "动漫类型错误")])
     error_content = models.TextField()
 
     def __str__(self):
@@ -27,3 +27,22 @@ class Error_log(models.Model):
 
     class Meta:
         verbose_name_plural = verbose_name = "错误表"
+
+
+class my_bolgs(models.Model):
+    classification = models.CharField(verbose_name="分类",
+                                      choices=[("1", "爬虫"),
+                                               ("2", "django"),
+                                               ("3", "前端"),
+                                               ("4", "mysql")],
+                                      max_length=16, null=True)
+
+    name = models.CharField(verbose_name="博客名字", null=True, max_length=64)
+    introduction = models.TextField(verbose_name="简介", max_length=256, null=True, default=None)
+    date = models.DateTimeField(verbose_name="更新实践", auto_now=True)
+
+    def __str__(self):
+        return "{}-{}".format(self.classification, self.name)
+
+    class Meta:
+        verbose_name_plural = verbose_name = "博客表"

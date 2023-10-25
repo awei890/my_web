@@ -2,6 +2,7 @@ from django.forms import ModelForm
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from stationmaster import models
+import markdown
 
 
 # Create your views here.
@@ -97,14 +98,35 @@ def my_blogs(request):
 
     if request.GET.get("name"):
         name = request.GET.get("name")
-        return render(request, "./blogposts/{}.html".format(name))
+        blog = models.my_bolgs.objects.filter(name=name)[0]
+        data = markdown.markdown(blog.content, extensions=[
+            'markdown.extensions.extra',        # 用于标题、表格、引用这些基本转换
+            'markdown.extensions.codehilite',   # 用于语法高亮
+            'markdown.extensions.toc',          # 用于生成目录
+            'markdown.extensions.abbr',
+            'markdown.extensions.attr_list',
+            'markdown.extensions.def_list',
+            'markdown.extensions.fenced_code',
+            'markdown.extensions.footnotes',
+            'markdown.extensions.md_in_html',
+            'markdown.extensions.tables',
+            'markdown.extensions.admonition',
+            'markdown.extensions.legacy_attrs',
+            'markdown.extensions.legacy_em',
+            'markdown.extensions.meta',
+            'markdown.extensions.nl2br',
+            'markdown.extensions.sane_lists',
+            'markdown.extensions.smarty',
+            'markdown.extensions.wikilinks'
+        ])
+        return render(request, "blogs/blog.html", {"data": data})
 
     if request.GET.get("classification"):
         blogs_list = models.my_bolgs.objects.filter(classification=request.GET.get("classification"))
-        return render(request, "my_blogs.html", {"blogs": blogs_list})
+        return render(request, "blogs/my_blogs.html", {"blogs": blogs_list})
 
     blogs_list = models.my_bolgs.objects.all()
-    return render(request, "my_blogs.html", {"blogs": blogs_list})
+    return render(request, "blogs/my_blogs.html", {"blogs": blogs_list})
 
 
 def clear(request):

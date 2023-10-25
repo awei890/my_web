@@ -1,0 +1,12 @@
+{% extends 'Navigator_Bar.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css\pygment\markdown_highlighy.css' %}">
+{% endblock %}
+
+{% block mainbody %}
+<div class="container">
+    {{ data|safe }}
+</div>
+{% endblock %}

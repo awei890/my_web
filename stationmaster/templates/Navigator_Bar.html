@@ -9,7 +9,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="{% static '\plugins\bootstrap-3.4.1\css\bootstrap.css' %}">
     <link rel="stylesheet" href="{% static '\plugins\videojs\vjs_8.5.2_video-js.css' %}">
-
+    {% block css %}
+    {% endblock %}
     <style>
         .hide{
             display: None;
@@ -22,8 +23,6 @@
         }
 
     </style>
-    {% block css %}
-    {% endblock %}
 </head>
 
 <body>

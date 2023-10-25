@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "stationmaster",
     'anime_func',
     "forum_func",
+    'mdeditor',
 ]
 
 MIDDLEWARE = [
@@ -120,7 +121,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 # 静态文件,一般是img,js,css {% static 'xxx' %}
 
 
@@ -130,6 +131,16 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = os.path.join(BASE_DIR, "file/")
 # 所有静态文件会收集到file目录下，用于uwsgi直接调用
+
+
+MEDIA_URL = "/media/"
+# 媒体文件url，类似STATIC_URL
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+# 类似STATIC_ROOT
+
 
 # Default primary key field type-
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

@@ -1,4 +1,5 @@
 from django.db import models
+from mdeditor.fields import MDTextField
 
 
 # Create your models here.
@@ -39,6 +40,7 @@ class my_bolgs(models.Model):
 
     name = models.CharField(verbose_name="博客名字", null=True, max_length=64)
     introduction = models.TextField(verbose_name="简介", max_length=256, null=True, default=None)
+    content = MDTextField(verbose_name="博客内容", null=True, default=None)
     date = models.DateTimeField(verbose_name="更新实践", auto_now=True)
 
     def __str__(self):

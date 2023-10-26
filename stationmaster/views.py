@@ -153,3 +153,6 @@ def errors(request):
         error_content=content
     )
     return JsonResponse({})
+
+def test(req):
+    return render(req, "new.html")

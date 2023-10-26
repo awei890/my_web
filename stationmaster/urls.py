@@ -8,4 +8,5 @@ urlpatterns = [
     path("clear", views.clear),
     path("errors", views.errors),
     path("my_blogs", views.my_blogs),
+    path("test", views.test),
 ]

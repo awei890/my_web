@@ -136,11 +136,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, "file/")
 MEDIA_URL = "/media/"
 # 媒体文件url，类似STATIC_URL
 
-X_FRAME_OPTIONS = 'SAMEORIGIN'
-
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 # 类似STATIC_ROOT
 
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+# iframe框的一些设置
 
 # Default primary key field type-
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

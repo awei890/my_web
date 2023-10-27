@@ -92,17 +92,60 @@ def my_blogs(request):
     req:
         ip/index/my_blogs       如果无参数，返回博客索引页
                                 如果有参数 {“name”:"博客的名字"}
+                                        {“page”:"1"}                            ->  返回所有blog中的10个blog
+                                        {"classification": "分类", “page”:"1"}   ->  返回特定分类的10个blog
     res:
         返回blogposts的html文件
     '''
+
+    def page_navigation(page, total, length):
+        '''
+        分页函数 （已经默认page <= total）
+        page:当前页数
+        total:展示数据需要几页
+        length:分页栏长度，需要单数
+
+        返回：data: 页面列表，用于前端循环
+             i:游标，得到目前page在集合的第几个
+        '''
+        if page > total:
+            # 保证当前数不会超过总数
+            return
+        if not length % 2:
+            # 保证是单数
+            return
+
+        # 总长度 > 分页长度
+        if total > length:
+            # 当前页数 > 分页长度中间数(左边)
+            if page >= length // 2 + 1:
+                # 当前页数 <= 总长度-分页长度中间数（右边）
+                if page <= total - length // 2:
+                    data = [i for i in range(page - length // 2, page + length // 2 + 1)]
+                else:
+                    data = [i + 1 for i in range(total - length, total)]
+
+            # 当前页数 < 分页长度中间数(左边)
+            if page < length // 2 + 1:
+                data = [i + 1 for i in range(length)]
+
+        # 总长度 < 分页长度
+        else:
+            data = [i + 1 for i in range(total)]
+
+        # 拿到游标
+        i = data.index(page)
+        return data, i
+
+    # ————————————————————————————————
 
     if request.GET.get("name"):
         name = request.GET.get("name")
         blog = models.my_bolgs.objects.filter(name=name)[0]
         data = markdown.markdown(blog.content, extensions=[
-            'markdown.extensions.extra',        # 用于标题、表格、引用这些基本转换
-            'markdown.extensions.codehilite',   # 用于语法高亮
-            'markdown.extensions.toc',          # 用于生成目录
+            'markdown.extensions.extra',  # 用于标题、表格、引用这些基本转换
+            'markdown.extensions.codehilite',  # 用于语法高亮
+            'markdown.extensions.toc',  # 用于生成目录
             'markdown.extensions.abbr',
             'markdown.extensions.attr_list',
             'markdown.extensions.def_list',
@@ -121,12 +164,36 @@ def my_blogs(request):
         ])
         return render(request, "blogs/blog.html", {"data": data})
 
-    if request.GET.get("classification"):
-        blogs_list = models.my_bolgs.objects.filter(classification=request.GET.get("classification"))
-        return render(request, "blogs/my_blogs.html", {"blogs": blogs_list})
+    if request.GET.get("classification") and request.GET.get("page"):
+        '''从分类的blogs选10个'''
+        classify = request.GET.get("classification")
+        page = int(request.GET.get("page"))
+        # 拿到所有blog对象
+        blogs = models.my_bolgs.objects.filter(classification=classify)
 
-    blogs_list = models.my_bolgs.objects.all()
-    return render(request, "blogs/my_blogs.html", {"blogs": blogs_list})
+        if page > blogs.count() // 10 + 1:
+            # 如果前往的页面比页面总数还大，则返回错误信息
+            return render(request, "blogs/my_blogs.html")
+
+        blogs_list = blogs[page - 1: page * 10 - 1]
+        data, cursor = page_navigation(page, blogs.count() // 10 + 1, 5)
+
+        return render(request, "blogs/my_blogs.html", {"blogs": blogs_list, "pages": data})
+
+    if request.GET.get("page"):
+        '''从全部blogs中选10个'''
+        page = int(request.GET.get("page"))
+        # 拿到所有blog对象
+        blogs = models.my_bolgs.objects.all()
+
+        if page > blogs.count() // 10 + 1:
+            # 如果前往的页面比页面总数还大，则返回错误信息
+            return render(request, "blogs/my_blogs.html")
+
+        blogs_list = blogs[page - 1: page * 10 - 1]
+        data, cursor = page_navigation(page, blogs.count() // 10 + 1, 5)
+
+        return render(request, "blogs/my_blogs.html", {"blogs": blogs_list, "pages": data})
 
 
 def clear(request):
@@ -153,6 +220,7 @@ def errors(request):
         error_content=content
     )
     return JsonResponse({})
+
 
 def test(req):
     return render(req, "new.html")

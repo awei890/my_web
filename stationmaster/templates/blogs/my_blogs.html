@@ -16,12 +16,12 @@
                     <h2 class="penel-title">分类</h2>
                     <hr>
                     <div class="list-group">
-                        <a href="/index/my_blogs" class="list-group-item" style="border:0px;">全部</a>
-                        <a href="?classification=1" class="list-group-item"
+                        <a href="/index/my_blogs?page=1" class="list-group-item" style="border:0px;">全部</a>
+                        <a href="?classification=1&page=1" class="list-group-item"
                            style="border:0px;">爬虫</a>
-                        <a href="?classification=2" class="list-group-item"
+                        <a href="?classification=2&page=1" class="list-group-item"
                            style="border:0px;">django</a>
-                        <a href="?classification=3" class="list-group-item"
+                        <a href="?classification=3&page=1" class="list-group-item"
                            style="border:0px;">前端</a>
                     </div>
                 </div>
@@ -56,6 +56,24 @@
                     </div>
                     {% endfor %}
                 </div>
+
+                <nav aria-label="Page navigation" style="text-align:center">
+                    <ul class="pagination" id="page">
+                        <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        {% for item in pages %}
+                        <li><a href="#">{{ item }}</a></li>
+                        {% endfor %}
+                        <li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
 
@@ -63,6 +81,14 @@
         </div>
 
     </div>
+
+
 </div>
 
+{% endblock %}
+{% block js %}
+<script>
+    li = $("#page").children()
+
+</script>
 {% endblock %}

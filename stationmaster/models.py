@@ -31,12 +31,13 @@ class Error_log(models.Model):
 
 
 class my_bolgs(models.Model):
-    classification = models.CharField(verbose_name="分类",
-                                      choices=[("1", "爬虫"),
-                                               ("2", "django"),
-                                               ("3", "前端"),
-                                               ("4", "mysql")],
-                                      max_length=16, null=True)
+    classify_choices = [("1", "爬虫"),
+                        ("2", "django"),
+                        ("3", "前端"),
+                        ("4", "mysql"),
+                        ("5", "科学哲学"),]
+
+    classification = models.CharField(verbose_name="分类", choices=classify_choices, max_length=16, null=True)
 
     name = models.CharField(verbose_name="博客名字", null=True, max_length=64)
     introduction = models.TextField(verbose_name="简介", max_length=256, null=True, default=None)
